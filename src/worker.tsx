@@ -4,6 +4,7 @@ import type { FC } from "hono/jsx";
 import { Layout } from "./layout";
 import { Sortable } from "./Sortable";
 import { Render } from "./Render";
+import basicRoute from "../packages/unxxxed/basic-route";
 
 const Add: FC = () => {
   // お悩みポイント 2
@@ -25,4 +26,5 @@ app.get("/", async (c) => {
   );
 });
 
+app.route("/basic", basicRoute);
 export default app;

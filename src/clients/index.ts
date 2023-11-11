@@ -1,5 +1,6 @@
 import Alpine from "alpinejs";
-import sort from "./sort";
+import sort from "../sort";
+import listner from "../../packages/unxxxed/basic-route/components/listener";
 
 // お悩みポイント 1
 Alpine.directive(
@@ -21,4 +22,5 @@ window.addEventListener("load", (_event) => {
   window.Alpine.start();
 });
 
-window.onload = sort;
+window.addEventListener("load", sort);
+window.addEventListener("load", listner);
