@@ -1,23 +1,28 @@
-import { Hono } from 'hono'
-import { html } from 'hono/html'
-import type { FC } from 'hono/jsx'
-import { Layout } from './layout'
+import { Hono } from "hono";
+import { html } from "hono/html";
+import type { FC } from "hono/jsx";
+import { Layout } from "./layout";
+import { Sortable } from "./Sortable";
+import { Render } from "./Render";
 
 const Add: FC = () => {
   // お悩みポイント 2
   return html`<div x-data="{add: function(x, y) { return x + y }}">
     <button type="button" x-on:click="alert(add(1, 2))">Show</button>
-  </div>`
-}
+  </div>`;
+};
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', async (c) => {
+app.get("/", async (c) => {
   return c.html(
     <Layout title="テスト">
       <Add />
+      {/* <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script> */}
+      {/* <Sortable> <Render /> </Sortable> */}
+      <Render />
     </Layout>
-  )
-})
+  );
+});
 
-export default app
+export default app;
