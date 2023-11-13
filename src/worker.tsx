@@ -5,6 +5,8 @@ import { Layout } from "./layout";
 import { Sortable } from "./Sortable";
 import { Render } from "./Render";
 import basicRoute from "../packages/unxxxed/basic-route";
+import { cartHonoApp } from "../packages/routes/src/cart/cart";
+import Meta from "./components/Meta";
 
 const Add: FC = () => {
   // お悩みポイント 2
@@ -14,6 +16,13 @@ const Add: FC = () => {
 };
 
 const app = new Hono();
+
+app.use("*", async (c, next) => {
+  c.setRenderer((content) => {
+    return c.html(<Meta>{content}</Meta>);
+  });
+  await next();
+});
 
 app.get("/", async (c) => {
   return c.html(
@@ -27,4 +36,5 @@ app.get("/", async (c) => {
 });
 
 app.route("/basic", basicRoute);
+app.route("/cart", cartHonoApp);
 export default app;

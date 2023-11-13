@@ -1,6 +1,6 @@
 import Alpine from "alpinejs";
 import sort from "../sort";
-import listner from "../../packages/unxxxed/basic-route/components/listener";
+import { cartUpdate } from "./cart";
 
 // お悩みポイント 1
 Alpine.directive(
@@ -23,4 +23,4 @@ window.addEventListener("load", (_event) => {
 });
 
 window.addEventListener("load", sort);
-window.addEventListener("load", listner);
+window.addEventListener("load", cartUpdate);
