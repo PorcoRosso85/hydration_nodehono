@@ -2,11 +2,11 @@ import { Hono } from "hono";
 import { html } from "hono/html";
 import type { FC } from "hono/jsx";
 import { Layout } from "./layout";
-import { Sortable } from "./Sortable";
-import { Render } from "./Render";
+import { Meta } from "./components/Meta";
 import basicRoute from "../packages/unxxxed/basic-route";
 import { cartHonoApp } from "../packages/routes/src/cart/cart";
-import Meta from "./components/Meta";
+import { sortHonoApp } from "../packages/routes/src/sort/sort";
+import { SortExample } from "../packages/components/src/sort/SortExample";
 
 const Add: FC = () => {
   // お悩みポイント 2
@@ -26,15 +26,15 @@ app.use("*", async (c, next) => {
 
 app.get("/", async (c) => {
   return c.html(
-    <Layout title="テスト">
-      <Add />
-      {/* <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script> */}
-      {/* <Sortable> <Render /> </Sortable> */}
-      <Render />
-    </Layout>
+    <>
+      <Layout title="テスト">
+        <Add />
+      </Layout>
+    </>
   );
 });
 
 app.route("/basic", basicRoute);
 app.route("/cart", cartHonoApp);
+app.route("/sort", sortHonoApp);
 export default app;

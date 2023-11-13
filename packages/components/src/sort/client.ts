@@ -1,6 +1,6 @@
 import Sortable from "sortablejs";
 
-const sort = () => {
+export const sortHydration = () => {
   const sortTargets = document.querySelectorAll(".child");
   if (sortTargets) {
     for (let i = 0; i < sortTargets.length; i++) {
@@ -19,10 +19,5 @@ const sort = () => {
     }
   }
 
-  // const sortTarget = document.querySelector(".child") as HTMLElement;
-  // if (sortTarget) {
-  //   return Sortable.create(sortTarget);
-  // }
+  console.log("sort hydration has loaded.");
 };
-
-export default sort;

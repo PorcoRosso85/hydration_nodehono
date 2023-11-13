@@ -15,11 +15,10 @@ app
   })
   .post("/add/:id", async (c) => {
     const parcedBody = await c.req.parseBody();
-    const item = parcedBody["add"];
+    const value: number = Number(parcedBody["add"]);
     // console.log("add from client: ", item);
     const id = await c.req.param("id");
-    // item.idのキーで、add...に+1
-    addedItemToCartData.push({ [id]: 1 });
+    addedItemToCartData.push({ [id]: value });
     console.log("added item id and value: ", addedItemToCartData);
 
     c.header("HX-Trigger", "cartUpdate");

@@ -1,4 +1,4 @@
-export const Render = () => {
+export const SortExample = () => {
   return (
     <>
       <ul class="child">

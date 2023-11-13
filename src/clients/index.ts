@@ -1,6 +1,6 @@
 import Alpine from "alpinejs";
-import sort from "../sort";
-import { cartUpdate } from "./cart";
+import { sortHydration } from "../../packages/components/src/sort/client";
+import { cartUpdate } from "../../packages/components/src/cart/client";
 
 // お悩みポイント 1
 Alpine.directive(
@@ -22,5 +22,5 @@ window.addEventListener("load", (_event) => {
   window.Alpine.start();
 });
 
-window.addEventListener("load", sort);
+window.addEventListener("load", sortHydration);
 window.addEventListener("load", cartUpdate);

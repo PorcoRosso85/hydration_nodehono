@@ -1,4 +1,6 @@
-const Meta = (props) => {
+import { html, raw } from "hono/html";
+
+export const Meta = (props) => {
   const style = `
       // .container { display: grid; grid-template-columns: 10% 90%; } 
   `;
@@ -11,6 +13,7 @@ const Meta = (props) => {
         />
         <style>{style}</style>
         <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+        <Hydration />
       </head>
       <body>
         <Body
@@ -24,6 +27,15 @@ const Meta = (props) => {
       </body>
     </html>
   );
+};
+
+// TODO: html経由でmiddleware追加しているが、middlewareにtsつかえると思う
+const Hydration = () => {
+  return html`
+    ${import.meta.env.PROD
+      ? raw('<script type="module" src="/static/clients/index.js"></script>')
+      : raw('<script type="module" src="/src/clients/index.ts"></script>')}
+  `;
 };
 
 const Body = (props) => {
