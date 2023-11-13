@@ -1,28 +1,17 @@
-import { cartData } from "../../../unxxxed/basic-route/data/cartData";
 import { addedItemToCartData } from "./data/addedItemToCartData";
 import { itemData } from "./data/itemData";
 
-let total = (cartData, id?) => {
-  if (!id) {
-    return cartData.reduce((sum, item) => {
-      return (
-        sum + Object.values(item).reduce((itemSum, value) => itemSum + value, 0)
-      );
-    }, 0);
-  } else {
-    return cartData.reduce((sum, item) => {
-      return sum + (item[`${id}`] || 0);
-    }, 0);
-  }
-};
-console.log("total of key 1", total(addedItemToCartData, "1"));
-
 export const CartItem = () => {
   return (
-    <>
-      Cart:
-      {total(addedItemToCartData)}
-    </>
+    <div
+      hx-get={`/cart/add/_/amount`}
+      hx-trigger="load, cartUpdate from:body"
+      hx-target={`.amount-_`}
+      hx-swap="outerHTML"
+      hx-ext="debug"
+    >
+      <span class={`amount-_`}>0</span>
+    </div>
   );
 };
 
@@ -59,9 +48,19 @@ export const ShopItems = () => {
                   +
                 </button>
               </td>
-              {/* ここイベント読み込み追加 */}
-              <td hx-get="" hx-trigger="once, ">
-                {total(addedItemToCartData, item.id)}
+              {/* TODO: ここイベント読み込み追加 */}
+              <td
+                hx-get={`/cart/add/${item.id}/amount`}
+                hx-trigger="load, cartUpdate from:body"
+                // hx-trigger="load"
+                hx-target={`.amount-${item.id}`}
+                // hx-swap="outerHTML"
+              >
+                <span class={`amount-${item.id}`}>0</span>
+                {/* <ItemAmmountInCart
+                  cartData={addedItemToCartData}
+                  id={item.id}
+                /> */}
               </td>
               <td>
                 <button hx-post="/cart/add" name="add" value="1" hx-swap="none">
@@ -74,4 +73,20 @@ export const ShopItems = () => {
       </table>
     </>
   );
+};
+
+export const ItemAmmountInCart = (props) => {
+  let total = (cartData, id?) => {
+    return id
+      ? cartData.reduce((sum, item) => sum + (item[id] || 0), 0)
+      : cartData.reduce(
+          (sum, item) =>
+            sum +
+            Object.values(item).reduce((itemSum, value) => itemSum + value, 0),
+          0
+        );
+  };
+
+  let amount = total(props.cartData, props.id);
+  return <>{amount === 0 ? <p>0</p> : <p>{amount}</p>}</>;
 };

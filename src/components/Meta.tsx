@@ -13,6 +13,7 @@ export const Meta = (props) => {
         />
         <style>{style}</style>
         <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+        <script src="https://unpkg.com/htmx.org/dist/ext/debug.js"></script>
         <Hydration />
       </head>
       <body>
