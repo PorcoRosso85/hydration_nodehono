@@ -47,11 +47,11 @@ const Body = (props) => {
 
         <div class="row-span-4 w-screen">
           <div class="grid grid-cols-12 gap-1">
-            <nav class="col-span-1 bg-gray-400">{props.nav}</nav>
+            {/* <nav class="col-span-1 bg-gray-400">{props.nav}</nav> */}
 
             <main class="col-span-8 bg-gray-100">{props.children}</main>
 
-            <aside class="col-span-3 bg-gray-600">{props.aside}</aside>
+            {/* <aside class="col-span-3 bg-gray-600">{props.aside}</aside> */}
           </div>
         </div>
 
