@@ -7,6 +7,8 @@ import basicRoute from "../packages/unxxxed/basic-route";
 import { cartHonoApp } from "../packages/routes/src/cart/cart";
 import { sortHonoApp } from "../packages/routes/src/sort/sort";
 import { SortExample } from "../packages/components/src/sort/SortExample";
+import { chatHonoApp } from "../packages/routes/src/chat/chat";
+import { searchHonoApp } from "../packages/routes/src/search/search";
 
 const Add: FC = () => {
   // お悩みポイント 2
@@ -37,4 +39,6 @@ app.get("/", async (c) => {
 app.route("/basic", basicRoute);
 app.route("/cart", cartHonoApp);
 app.route("/sort", sortHonoApp);
+app.route("/chat", chatHonoApp);
+app.route("/search", searchHonoApp);
 export default app;
