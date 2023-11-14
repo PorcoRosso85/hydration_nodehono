@@ -10,7 +10,21 @@ const app = new Hono();
 
 app
   .get("/", (c) => {
-    return c.render(<EditTable />);
+    return c.render(
+      <>
+        <EditTable />
+        <hr />
+        <HxIncludeExample />
+      </>
+    );
+  })
+  .post("/test", async (c) => {
+    const parseBody = await c.req.parseBody();
+    const input = parseBody["input"];
+    const i2 = parseBody["i2"];
+    console.log(input);
+    console.log(i2);
+    return c.html(<></>);
   })
   .get("/body", (c) => {
     return c.html(<EditTargetTableBody tableData={contactsListData} />);
@@ -78,3 +92,20 @@ app
   });
 
 export { app as formHonoApp };
+
+const HxIncludeExample = () => {
+  return (
+    <>
+      Enter email:
+      <input name="input" type="text" value="hello" placeholder="hello" />
+      <button
+        hx-post="/form/test"
+        hx-include="[name='input']"
+        hx-swap="none"
+        hx-vals='{"i2": "world"}'
+      >
+        Register!
+      </button>
+    </>
+  );
+};
