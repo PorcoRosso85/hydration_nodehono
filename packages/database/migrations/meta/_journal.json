@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1700009713325,
+      "tag": "0000_zippy_raza",
+      "breakpoints": true
+    }
+  ]
+}
