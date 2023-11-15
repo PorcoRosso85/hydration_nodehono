@@ -11,6 +11,8 @@ import { chatHonoApp } from "../packages/routes/src/chat/chat";
 import { searchHonoApp } from "../packages/routes/src/search/search";
 import { formConfig } from "../packages/routes/src/form/config";
 import { formHonoApp } from "../packages/routes/src/form/form";
+import { todoConfig } from "../packages/components/src/todo/config";
+import { todoHonoApp } from "../packages/routes/src/todo/todo";
 
 const Add: FC = () => {
   // お悩みポイント 2
@@ -44,4 +46,5 @@ app.route("/sort", sortHonoApp);
 app.route("/chat", chatHonoApp);
 app.route("/search", searchHonoApp);
 app.route(formConfig.routePrefix, formHonoApp);
+app.route(todoConfig.routePrefix, todoHonoApp);
 export default app;
