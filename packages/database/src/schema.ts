@@ -10,3 +10,7 @@ export const todos = sqliteTable("todos", {
   content: text("content").notNull(),
   c2: text("c2").notNull(),
 });
+
+export const email = sqliteTable("email", {
+  email: text("email").notNull(),
+});

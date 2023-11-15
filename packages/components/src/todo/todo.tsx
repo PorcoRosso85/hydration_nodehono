@@ -6,12 +6,28 @@ export const TodoAdd = () => {
     <>
       <input name="content" type="text" />
       <input name="c2" type="text" />
+      {/*  */}
       <button
         hx-post={`${config.routePrefix}/add`}
         hx-include='[name="content"], [name="c2"]'
         hx-swap="none"
       >
         add
+      </button>
+    </>
+  );
+};
+
+export const EmailAdd = () => {
+  return (
+    <>
+      <input name="email" type="email" />
+      <button
+        hx-post={`${config.routePrefix}/add/email`}
+        hx-include="[name='email']"
+        hx-swap="none"
+      >
+        register
       </button>
     </>
   );
