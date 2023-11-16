@@ -1,21 +1,41 @@
 import { config } from "./config";
 
-export const TodoAdd = () => {
-  // TODO: swap the target top of list
-  //
-  return (
-    <>
-      <input name="content" type="text" placeholder="todo content" />
-      <input name="user" type="text" placeholder="todo content" />
-      <input name="id" type="number" placeholder="todo content" />
+export const TodoAdd = (props) => {
+  return props.error !== "true" ? (
+    <div hx-target="this" hx-swap="outerHTML">
+      <input name="id" type="number" placeholder="id" />
+      <input
+        name="content"
+        type="text"
+        placeholder="content"
+        value={`${props.inputedContent}`}
+      />
+      <input name="user" type="text" placeholder="user" />
       <button
         hx-post={`${config.routePrefix}/add`}
         hx-include='[name="id"], [name="content"], [name="user"]'
-        hx-swap="none"
       >
         add
       </button>
-    </>
+    </div>
+  ) : (
+    <div hx-target="this" hx-swap="outerHTML">
+      <input name="id" type="number" placeholder="id" />
+      <input
+        name="content"
+        type="text"
+        placeholder="content"
+        value={`${props.inputedContent}`}
+      />
+      if error
+      <input name="user" type="text" placeholder="user" />
+      <button
+        hx-post={`${config.routePrefix}/add`}
+        hx-include='[name="id"], [name="content"], [name="user"]'
+      >
+        add
+      </button>
+    </div>
   );
 };
 

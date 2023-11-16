@@ -9,7 +9,8 @@ import {
   apiInsertTodoSchema,
   insertEmailSchema,
 } from "../../../components/src/todo/validator";
-import { customLogger, genId, genUser } from "./middleware";
+import { customLogger } from "./middleware";
+import { PieChart } from "./chart";
 
 const app = new Hono();
 
@@ -24,8 +25,9 @@ app
       <>
         <EmailAdd />
         <hr />
-        <TodoAdd />
+        <TodoAdd inputedContent="" />
         <TodoList todoItemsData={todoItemsDataSample} />
+        <PieChart />
       </>
     );
   })
@@ -40,26 +42,32 @@ app
     "/add",
     validator("form", (v, c) => {
       const parsed = apiInsertTodoSchema.safeParse(v);
-      return parsed.success ? parsed.data : c.text("invalid", 401);
+      const content = v["content"];
+      const errorMessage = "validation error";
+      return parsed.success
+        ? parsed.data
+        : // TODO: 200だけどエラーを返す、401でもhtmx:responseErrorトリガーで可能
+          c.html(
+            <TodoAdd
+              inputedContent={content}
+              error="true"
+              errorMessage={errorMessage}
+            />
+          );
+      // :  c.text("", 401);
     }),
     async (c) => {
       const parseBody = await c.req.parseBody();
       const id = parseBody["id"];
-      const content = parseBody["content"];
-      const user = parseBody["user"];
-      customLogger(
-        "Todo added",
-        `id: ${id}`,
-        `content: ${content}`,
-        `user: ${user}`
-      );
       // const id = crypto.randomUUID();
+      const content = parseBody["content"];
+      customLogger("Todo added", `id: ${id}`, `content: ${content}`);
       // db追加
 
       // db追加完了を確認
 
       // swap用に追加idのitemを返す
-      return c.html(<></>);
+      return c.html(<TodoAdd inputedContent={content} error="false" />);
     }
   )
   .post("/add/email", zValidator("form", insertEmailSchema), async (c) => {
