@@ -15,6 +15,8 @@ import { todoConfig } from "../packages/components/src/todo/config";
 import { todoHonoApp } from "../packages/routes/src/todo/todo";
 import { gridConfig } from "../packages/unxxxed/grid/route/src/confit";
 import { gridHonoApp } from "../packages/unxxxed/grid/route/src/cells";
+import { threeConfig } from "../packages/routes/src/three/config";
+import { threeHonoApp } from "../packages/routes/src/three/three";
 
 const Add: FC = () => {
   // お悩みポイント 2
@@ -50,4 +52,5 @@ app.route("/search", searchHonoApp);
 app.route(formConfig.routePrefix, formHonoApp);
 app.route(todoConfig.routePrefix, todoHonoApp);
 app.route(gridConfig.routePrefix, gridHonoApp);
+app.route(threeConfig.routePrefix, threeHonoApp);
 export default app;

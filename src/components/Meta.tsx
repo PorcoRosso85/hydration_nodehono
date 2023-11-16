@@ -42,7 +42,8 @@ const Hydration = () => {
 const Body = (props) => {
   return (
     <>
-      <div class="grid grid-rows-6 h-screen bg-gray-100">
+      {/* <div class="grid grid-rows-6 h-screen bg-gray-100"> */}
+      <div>
         <header class="row-span-1 w-screen bg-gray-300">{props.header}</header>
 
         <div class="row-span-4 w-screen">
@@ -55,7 +56,7 @@ const Body = (props) => {
           </div>
         </div>
 
-        <footer class="row-span-1 w-screen bg-gray-300">{props.footer}</footer>
+        {/* <footer class="row-span-1 w-screen bg-gray-300">{props.footer}</footer> */}
       </div>
     </>
   );
