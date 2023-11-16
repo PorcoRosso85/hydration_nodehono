@@ -1,6 +1,7 @@
 import Alpine from "alpinejs";
 import { sortHydration } from "../../packages/components/src/sort/client";
 import { cartUpdate } from "../../packages/components/src/cart/client";
+import { gridDnd } from "../../packages/unxxxed/grid/components/src/client";
 
 // お悩みポイント 1
 Alpine.directive(
@@ -23,4 +24,5 @@ window.addEventListener("load", (_event) => {
 });
 
 window.addEventListener("load", sortHydration);
-window.addEventListener("load", cartUpdate);
+cartUpdate;
+gridDnd;

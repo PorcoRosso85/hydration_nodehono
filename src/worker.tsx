@@ -13,6 +13,8 @@ import { formConfig } from "../packages/routes/src/form/config";
 import { formHonoApp } from "../packages/routes/src/form/form";
 import { todoConfig } from "../packages/components/src/todo/config";
 import { todoHonoApp } from "../packages/routes/src/todo/todo";
+import { gridConfig } from "../packages/unxxxed/grid/route/src/confit";
+import { gridHonoApp } from "../packages/unxxxed/grid/route/src/cells";
 
 const Add: FC = () => {
   // お悩みポイント 2
@@ -47,4 +49,5 @@ app.route("/chat", chatHonoApp);
 app.route("/search", searchHonoApp);
 app.route(formConfig.routePrefix, formHonoApp);
 app.route(todoConfig.routePrefix, todoHonoApp);
+app.route(gridConfig.routePrefix, gridHonoApp);
 export default app;
