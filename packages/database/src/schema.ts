@@ -6,9 +6,9 @@ export const users = sqliteTable("users", {
 });
 
 export const todos = sqliteTable("todos", {
-  // id: integer("id").primaryKey({ autoIncrement: true }),
+  id: integer("id").primaryKey(),
+  user: text("user").notNull(),
   content: text("content").notNull(),
-  c2: text("c2").notNull(),
 });
 
 export const email = sqliteTable("email", {

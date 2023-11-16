@@ -23,6 +23,7 @@ window.addEventListener("load", (_event) => {
   window.Alpine.start();
 });
 
+// TODO: route pattern
 window.addEventListener("load", sortHydration);
 cartUpdate;
 gridDnd;

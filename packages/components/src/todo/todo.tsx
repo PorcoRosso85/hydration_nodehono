@@ -2,14 +2,15 @@ import { config } from "./config";
 
 export const TodoAdd = () => {
   // TODO: swap the target top of list
+  //
   return (
     <>
-      <input name="content" type="text" />
-      <input name="c2" type="text" />
-      {/*  */}
+      <input name="content" type="text" placeholder="todo content" />
+      <input name="user" type="text" placeholder="todo content" />
+      <input name="id" type="number" placeholder="todo content" />
       <button
         hx-post={`${config.routePrefix}/add`}
-        hx-include='[name="content"], [name="c2"]'
+        hx-include='[name="id"], [name="content"], [name="user"]'
         hx-swap="none"
       >
         add
@@ -21,7 +22,7 @@ export const TodoAdd = () => {
 export const EmailAdd = () => {
   return (
     <>
-      <input name="email" type="email" />
+      <input name="email" type="email" placeholder="xxx@xxxx.com" />
       <button
         hx-post={`${config.routePrefix}/add/email`}
         hx-include="[name='email']"
@@ -32,20 +33,6 @@ export const EmailAdd = () => {
     </>
   );
 };
-
-export type todoItem = {
-  id: string;
-  user: string;
-  content: string;
-};
-
-export const todoItemsData: todoItem[] = [
-  {
-    id: "00001",
-    user: "001",
-    content: "buy egg",
-  },
-];
 
 export const TodoList = (props) => {
   return (
