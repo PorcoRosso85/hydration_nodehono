@@ -1,5 +1,6 @@
 import Alpine from "alpinejs";
-// import { sortHydration } from "../../../components/src/sort/client";
+import { sortHydration } from "@hydration_hononode/sort";
+// import { sortHydration } from "@hydration_hononode/sort";
 // import { cartUpdate } from "../../../components/src/cart/client";
 // import { gridDnd } from "../../../unxxxed/grid/components/src/client";
 // import { scrollThreeDemension } from "../../../components/src/three/client";
@@ -29,7 +30,7 @@ window.addEventListener("load", (_event) => {
 });
 
 // // TODO: route pattern
-// window.addEventListener("DOMContentLoaded", sortHydration);
+window.addEventListener("DOMContentLoaded", sortHydration);
 // cartUpdate;
 // // gridDnd;
 // // scrollThreeDemension;

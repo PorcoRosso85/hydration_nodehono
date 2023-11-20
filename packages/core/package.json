@@ -17,6 +17,7 @@
   "dependencies": {
     "@hono/zod-validator": "^0.1.11",
     "@hydration_hononode/components": "workspace:^",
+    "@hydration_hononode/sort": "workspace:^",
     "better-sqlite3": "^9.1.1",
     "drizzle-orm": "^0.29.0",
     "drizzle-zod": "^0.5.1",
