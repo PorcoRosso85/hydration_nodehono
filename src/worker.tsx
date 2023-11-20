@@ -17,6 +17,8 @@ import { gridConfig } from "../packages/unxxxed/grid/route/src/confit";
 import { gridHonoApp } from "../packages/unxxxed/grid/route/src/cells";
 import { threeConfig } from "../packages/routes/src/three/config";
 import { threeHonoApp } from "../packages/routes/src/three/three";
+import { paymentConfig } from "../packages/routes/src/payment/config";
+import { paymentHonoApp } from "../packages/routes/src/payment/payment";
 
 const Add: FC = () => {
   // お悩みポイント 2
@@ -28,6 +30,7 @@ const Add: FC = () => {
 const app = new Hono();
 
 app.use("*", async (c, next) => {
+  // TODO: 指定のルートにhydrationする実装追加
   c.setRenderer((content) => {
     return c.html(<Meta>{content}</Meta>);
   });
@@ -53,4 +56,5 @@ app.route(formConfig.routePrefix, formHonoApp);
 app.route(todoConfig.routePrefix, todoHonoApp);
 app.route(gridConfig.routePrefix, gridHonoApp);
 app.route(threeConfig.routePrefix, threeHonoApp);
+app.route(paymentConfig.routePrefix, paymentHonoApp);
 export default app;
