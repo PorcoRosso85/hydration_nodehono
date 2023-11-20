@@ -10,6 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
+    "file": "vite-node",
     "build": "vite build && vite build --mode client",
     "preview": "wrangler pages dev dist",
     "deploy": "$npm_execpath build && wrangler pages deploy dist"
