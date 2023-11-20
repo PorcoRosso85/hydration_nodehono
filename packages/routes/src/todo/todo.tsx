@@ -39,6 +39,22 @@ app
     }
   )
   .post(
+    // TODO: register email
+    "/register",
+    validator("form", (v, c) => {
+      const parsed = insertEmailSchema.safeParse(v);
+      const errorMessage =
+        "enter correct email format, use lowerCase, upperCase and special char";
+      return parsed.success ? parsed.data : c.text(errorMessage, 401);
+    }),
+    async (c) => {
+      // register email to db
+
+      // TODO: 201? well done message?
+      return c.redirect("/", 201);
+    }
+  )
+  .post(
     "/add",
     validator("form", (v, c) => {
       const parsed = apiInsertTodoSchema.safeParse(v);
@@ -57,7 +73,7 @@ app
       // :  c.text("", 401);
     }),
     async (c) => {
-      const parseBody = await c.req.parseBody();
+      const parseBody = await c.req.valid("form");
       const id = parseBody["id"];
       // const id = crypto.randomUUID();
       const content = parseBody["content"];

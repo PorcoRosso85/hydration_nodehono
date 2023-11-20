@@ -4,13 +4,16 @@ export const TodoAdd = (props) => {
   return props.error !== "true" ? (
     <div hx-target="this" hx-swap="outerHTML">
       <input name="id" type="number" placeholder="id" />
+      <br />
       <input
         name="content"
         type="text"
         placeholder="content"
         value={`${props.inputedContent}`}
       />
+      <br />
       <input name="user" type="text" placeholder="user" />
+      <br />
       <button
         hx-post={`${config.routePrefix}/add`}
         hx-include='[name="id"], [name="content"], [name="user"]'
@@ -21,14 +24,17 @@ export const TodoAdd = (props) => {
   ) : (
     <div hx-target="this" hx-swap="outerHTML">
       <input name="id" type="number" placeholder="id" />
+      <br />
       <input
         name="content"
         type="text"
         placeholder="content"
         value={`${props.inputedContent}`}
       />
-      if error
+      <span style="color: red">{props.errorMessage}</span>
+      <br />
       <input name="user" type="text" placeholder="user" />
+      <br />
       <button
         hx-post={`${config.routePrefix}/add`}
         hx-include='[name="id"], [name="content"], [name="user"]'
@@ -44,7 +50,9 @@ export const EmailAdd = () => {
     <>
       <input name="email" type="email" placeholder="xxx@xxxx.com" />
       <button
+        // TODO: register email
         hx-post={`${config.routePrefix}/add/email`}
+        // hx-post={`${config.routePrefix}/register`}
         hx-include="[name='email']"
         hx-swap="none"
       >
