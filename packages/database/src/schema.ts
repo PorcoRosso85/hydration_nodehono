@@ -6,11 +6,12 @@ export const users = sqliteTable("users", {
 });
 
 export const todos = sqliteTable("todos", {
-  id: integer("id").primaryKey(),
+  id: integer("id").primaryKey({ autoIncrement: true }),
   user: text("user").notNull(),
   content: text("content").notNull(),
 });
 
 export const email = sqliteTable("email", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
   email: text("email").notNull(),
 });

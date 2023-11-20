@@ -18,6 +18,7 @@ import { sortHonoApp } from "@hydration_hononode/sort";
 // import { threeConfig } from "../../routes/src/three/config";
 // import { threeHonoApp } from "../../routes/src/three/three";
 import { paymentConfig, paymentHonoApp } from "@petittech/payment";
+import { databaseConfig, databaseHonoApp } from "@petittech/database";
 
 const Add: FC = () => {
   // お悩みポイント 2
@@ -28,24 +29,28 @@ const Add: FC = () => {
 
 const app = new Hono();
 
-app.use("*", async (c, next) => {
-  // TODO: 指定のルートにhydrationする実装追加
-  c.setRenderer((content) => {
-    return c.html(<Meta>{content}</Meta>);
-  });
-  await next();
-});
+app
+  .use("*", async (c, next) => {
+    // TODO: 指定のルートにhydrationする実装追加
+    c.setRenderer((content) => {
+      return c.html(<Meta>{content}</Meta>);
+    });
+    await next();
+  })
 
-app.get("/", async (c) => {
-  return c.html(
-    <>
-      <Layout title="テスト">
-        <Add />
-      </Layout>
-    </>
-  );
-});
+  .get("/", async (c) => {
+    return c.html(
+      <>
+        <Layout title="テスト">
+          <Add />
+        </Layout>
+      </>
+    );
+  })
 
+  .post("/database/add");
+
+// app.route("/test", testHonoApp);
 app.route("/sort", sortHonoApp);
 // app.route("/basic", basicRoute);
 // app.route("/cart", cartHonoApp);
@@ -56,4 +61,5 @@ app.route("/sort", sortHonoApp);
 // app.route(gridConfig.routePrefix, gridHonoApp);
 // app.route(threeConfig.routePrefix, threeHonoApp);
 app.route(paymentConfig.routePrefix, paymentHonoApp);
+app.route(databaseConfig.routePrefix, databaseHonoApp);
 export default app;
