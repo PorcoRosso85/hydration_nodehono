@@ -3,10 +3,9 @@ import { html } from "hono/html";
 import type { FC } from "hono/jsx";
 import { Layout } from "./layout";
 import { Meta } from "./components/Meta";
+import { Sortable } from "@hydration_hononode/components";
 // import basicRoute from "../../unxxxed/basic-route";
 // import { cartHonoApp } from "../../routes/src/cart/cart";
-// import { sortHonoApp } from "../../routes/src/sort/sort";
-// import { SortExample } from "../../components/src/sort/SortExample";
 // import { chatHonoApp } from "../../routes/src/chat/chat";
 // import { searchHonoApp } from "../../routes/src/search/search";
 // import { formConfig } from "../../routes/src/form/config";
@@ -43,6 +42,7 @@ app.get("/", async (c) => {
       <Layout title="テスト">
         <Add />
       </Layout>
+      <Sortable />
     </>
   );
 });
