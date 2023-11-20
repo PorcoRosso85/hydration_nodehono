@@ -1,5 +1,3 @@
-import "./example/styles.scss";
-
 export const Card = () => {
   const style = `
   @charset "UTF-8";
