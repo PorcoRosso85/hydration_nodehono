@@ -3,7 +3,7 @@ import { html } from "hono/html";
 import type { FC } from "hono/jsx";
 import { Layout } from "./layout";
 import { Meta } from "./components/Meta";
-import { Sortable } from "@hydration_hononode/components";
+import { sortHonoApp } from "@hydration_hononode/components";
 // import basicRoute from "../../unxxxed/basic-route";
 // import { cartHonoApp } from "../../routes/src/cart/cart";
 // import { chatHonoApp } from "../../routes/src/chat/chat";
@@ -42,14 +42,13 @@ app.get("/", async (c) => {
       <Layout title="テスト">
         <Add />
       </Layout>
-      <Sortable />
     </>
   );
 });
 
+app.route("/sort", sortHonoApp);
 // app.route("/basic", basicRoute);
 // app.route("/cart", cartHonoApp);
-// app.route("/sort", sortHonoApp);
 // app.route("/chat", chatHonoApp);
 // app.route("/search", searchHonoApp);
 // app.route(formConfig.routePrefix, formHonoApp);

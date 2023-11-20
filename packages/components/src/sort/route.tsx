@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { SortExample } from "../../../components/src/sort/SortExample";
+import { SortExample } from "./SortExample";
 
 const app = new Hono();
 app.get("/", (c) => {
