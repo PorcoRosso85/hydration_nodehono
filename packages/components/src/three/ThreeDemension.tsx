@@ -27,7 +27,7 @@ export const ThreeDemension = () => {
         </a-scene>
       </div>
       <div>
-        <a-scene>
+        <a-scene embedded>
           <a-assets>
             <audio
               id="click-sound"
@@ -72,6 +72,18 @@ export const ThreeDemension = () => {
               animation__fusing="property: scale; from: 1 1 1; to: 0.1 0.1 0.1; easing: easeInCubic; dur: 150; startEvents: fusing"
             ></a-cursor>
           </a-camera>
+        </a-scene>
+      </div>
+      <div>
+        <a-scene embedded>
+          <a-box
+            id="targetObject"
+            position="-1 0.5 -3"
+            rotation="0 45 0"
+            color="#4CC3D9"
+          >
+            <a-camera position="0 0 5"></a-camera>
+          </a-box>
         </a-scene>
       </div>
     </>

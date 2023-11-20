@@ -2,6 +2,11 @@ import Alpine from "alpinejs";
 import { sortHydration } from "../../packages/components/src/sort/client";
 import { cartUpdate } from "../../packages/components/src/cart/client";
 import { gridDnd } from "../../packages/unxxxed/grid/components/src/client";
+import { scrollThreeDemension } from "../../packages/components/src/three/client";
+import {
+  createTunnelEffect,
+  updateTunnelPosition,
+} from "../../packages/unxxxed/basic-route/components/client";
 
 // お悩みポイント 1
 Alpine.directive(
@@ -24,6 +29,9 @@ window.addEventListener("load", (_event) => {
 });
 
 // TODO: route pattern
-window.addEventListener("load", sortHydration);
+window.addEventListener("DOMContentLoaded", sortHydration);
 cartUpdate;
-gridDnd;
+// gridDnd;
+// scrollThreeDemension;
+document.addEventListener("DOMContentLoaded", createTunnelEffect);
+window.addEventListener("scroll", updateTunnelPosition);

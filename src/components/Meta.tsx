@@ -1,30 +1,23 @@
 import { html, raw } from "hono/html";
 
 export const Meta = (props) => {
-  const style = `
-      // .container { display: grid; grid-template-columns: 10% 90%; } 
-  `;
   return (
     <html>
       <head>
-        <link
-          href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-          rel="stylesheet"
-        />
-        <style>{style}</style>
+        <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://unpkg.com/htmx.org@1.9.6"></script>
         <script src="https://unpkg.com/htmx.org/dist/ext/debug.js"></script>
         <Hydration />
       </head>
       <body>
-        <Body
-          header={<Header />}
-          nav={<Nav />}
-          aside={<Side />}
-          footer={<Footer />}
-        >
-          {props.children}
-        </Body>
+        {/* <div class="grid grid-rows-6 h-screen bg-gray-100"> */}
+        {/* <Header /> */}
+        {/* <Nav /> */}
+        {/* <main class="col-span-8 bg-gray-100">{props.children}</main> */}
+        <main>{props.children}</main>
+        {/* <Side /> */}
+        {/* <Footer /> */}
+        {/* </div> */}
       </body>
     </html>
   );
@@ -39,47 +32,25 @@ const Hydration = () => {
   `;
 };
 
-const Body = (props) => {
-  return (
-    <>
-      {/* <div class="grid grid-rows-6 h-screen bg-gray-100"> */}
-      <div>
-        <header class="row-span-1 w-screen bg-gray-300">{props.header}</header>
-
-        <div class="row-span-4 w-screen">
-          <div class="grid grid-cols-12 gap-1">
-            {/* <nav class="col-span-1 bg-gray-400">{props.nav}</nav> */}
-
-            <main class="col-span-8 bg-gray-100">{props.children}</main>
-
-            {/* <aside class="col-span-3 bg-gray-600">{props.aside}</aside> */}
-          </div>
-        </div>
-
-        {/* <footer class="row-span-1 w-screen bg-gray-300">{props.footer}</footer> */}
-      </div>
-    </>
-  );
-};
-
-const Header = () => <>Header...</>;
-const Footer = () => <>Footer...</>;
-const Nav = () => <>Nav...</>;
-const Side = () => <>Side...</>;
-
-const ScriptElt = () => (
-  <script
-    dangerouslySetInnerHTML={{
-      __html: `
-        const menuButton = document.getElementById('menuButton');
-        const sidebar = document.getElementById('sidebar');
-        
-        menuButton.addEventListener('click', () => {
-          sidebar.classList.toggle('hidden');
-        }); 
-      `,
-    }}
-  ></script>
+const Header = () => (
+  <>
+    <header class="row-span-1 w-screen bg-gray-300">Header...</header>
+  </>
+);
+const Footer = () => (
+  <>
+    <footer class="row-span-1 w-screen bg-gray-300">Footer...</footer>
+  </>
+);
+const Nav = () => (
+  <>
+    <nav class="col-span-1 bg-gray-400">Nav...</nav>
+  </>
+);
+const Side = () => (
+  <>
+    <aside class="col-span-3 bg-gray-600">Side...</aside>
+  </>
 );
 
 export default Meta;
