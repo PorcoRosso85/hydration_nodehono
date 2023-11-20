@@ -1,6 +1,6 @@
 export type chatHistoryDataType = {
   userId: string;
-  chatRoomId: string;
+  roomId: string;
   messageId: string;
   message: string;
 };
@@ -8,14 +8,29 @@ export type chatHistoryDataType = {
 export const chatHistoryData: chatHistoryDataType[] = [
   {
     userId: "001",
-    chatRoomId: "1",
+    roomId: "01",
     messageId: "0001",
     message: "hi, 002",
   },
   {
     userId: "002",
-    chatRoomId: "1",
+    roomId: "02",
     messageId: "0002",
     message: "hi, 001",
+  },
+];
+
+export const roomList = [
+  {
+    roomId: "01",
+    name: "01",
+  },
+  {
+    roomId: "02",
+    name: "02",
+  },
+  {
+    roomId: "03",
+    name: "03",
   },
 ];
