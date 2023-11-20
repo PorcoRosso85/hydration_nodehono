@@ -1,8 +1,5 @@
 import { Hono } from "hono";
-import {
-  Checkout,
-  SuccessCheckout,
-} from "../../../components/src/payment/Payment";
+import { Checkout, SuccessCheckout } from "./Payment";
 
 const app = new Hono();
 
