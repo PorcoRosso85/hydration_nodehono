@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { marked } from "marked";
-import { Profile } from "./Profile";
+import { Contact, Profile } from "./Profile";
 import md from "./sample.md";
 
 import { articles } from "./Profile";
@@ -20,8 +20,17 @@ app
   //   return c.html(marked(md));
   // });
 
-  .get("/articles", (c) => {
-    return c.render(<Profile articles={articles} />);
+  .get("/contact", (c) => {
+    return c.render(<Contact />);
+  })
+  .post("/contact", async (c) => {
+    const parsed = await c.req.parseBody();
+    const email = parsed["email"];
+    const firstName = parsed["first-name"];
+    const lastName = parsed["last-name"];
+    const message = parsed["message"];
+    console.debug(email, firstName, lastName, message);
+    return c.text("");
   });
 
 export { app as aboutHonoApp };

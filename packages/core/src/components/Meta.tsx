@@ -2,16 +2,9 @@ import { html, raw } from "hono/html";
 
 export const Meta = (props) => {
   const style = `
-body {
-  margin: 0;
-  font-family: Helvetica, sans-serif;
-  background-color: #f4f4f4;
+.reset-style, .reset-style * {
+  all: revert;
 }
-
-a {
-  color: #000;
-}
-
   `;
   return (
     <html>
@@ -50,7 +43,7 @@ const Header = () => {
 header {
   background-color: #fff;
   box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
-  position: fixed;
+  // position: fixed;
   width: 100%;
   z-index: 3;
 }
