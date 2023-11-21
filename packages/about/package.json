@@ -1,0 +1,16 @@
+{
+  "name": "@petittech/about",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "hono": "^3.9.0",
+    "marked": "^10.0.0"
+  }
+}

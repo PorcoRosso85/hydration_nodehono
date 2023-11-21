@@ -18,6 +18,7 @@
   "dependencies": {
     "@hono/zod-validator": "^0.1.11",
     "@hydration_hononode/sort": "workspace:^",
+    "@petittech/about": "workspace:^",
     "@petittech/database": "workspace:^",
     "@petittech/payment": "workspace:^",
     "hono": "^3.9.0",

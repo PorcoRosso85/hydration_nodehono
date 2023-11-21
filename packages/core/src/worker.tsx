@@ -19,6 +19,8 @@ import { sortHonoApp } from "@hydration_hononode/sort";
 // import { threeHonoApp } from "../../routes/src/three/three";
 import { paymentConfig, paymentHonoApp } from "@petittech/payment";
 import { databaseConfig, databaseHonoApp } from "@petittech/database";
+import "@petittech/about";
+import { aboutHonoApp } from "@petittech/about";
 
 const Add: FC = () => {
   // お悩みポイント 2
@@ -61,5 +63,8 @@ app.route("/sort", sortHonoApp);
 // app.route(gridConfig.routePrefix, gridHonoApp);
 // app.route(threeConfig.routePrefix, threeHonoApp);
 app.route(paymentConfig.routePrefix, paymentHonoApp);
-app.route(databaseConfig.routePrefix, databaseHonoApp);
+// FIXME:
+// app.route(databaseConfig.routePrefix, databaseHonoApp);
+app.route("/about", aboutHonoApp);
+
 export default app;

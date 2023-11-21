@@ -23,7 +23,12 @@ export default defineConfig(({ mode }) => {
     };
   } else {
     return {
-      plugins: [pages(), devServer()],
+      plugins: [
+        pages(),
+        devServer({
+          entry: "./src/index.ts",
+        }),
+      ],
     };
   }
 });
