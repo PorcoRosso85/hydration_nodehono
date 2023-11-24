@@ -1,0 +1,41 @@
+{
+  "name": "@hydration_nodehono/core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "file": "vite-node",
+    "build": "vite build && vite build --mode client",
+    "preview": "wrangler pages dev dist",
+    "deploy": "$npm_execpath build && wrangler pages deploy dist"
+  },
+  "dependencies": {
+    "@hono/zod-validator": "^0.1.11",
+    "@hydration_hononode/sort": "workspace:^",
+    "@petittech/about": "workspace:^",
+    "@petittech/database": "workspace:^",
+    "@petittech/payment": "workspace:^",
+    "hono": "^3.9.0",
+    "htmx.org": "^1.9.8",
+    "minisearch": "^6.2.0",
+    "sortablejs": "^1.15.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20230914.0",
+    "@hono/vite-cloudflare-pages": "^0.0.2",
+    "@hono/vite-dev-server": "^0.0.12",
+    "@types/alpinejs": "^3.13.3",
+    "@types/sortablejs": "^1.15.5",
+    "alpinejs": "^3.13.2",
+    "vite": "^4.5.0",
+    "vite-node": "^0.34.6",
+    "wrangler": "^3.14.0"
+  }
+}

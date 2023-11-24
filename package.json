@@ -1,23 +1,17 @@
 {
-  "type": "module",
+  "name": "hydration_nodehono",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build && vite build --mode client",
-    "preview": "wrangler pages dev dist",
-    "deploy": "$npm_execpath build && wrangler pages deploy dist"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "file": "pnpm --filter @hydration_nodehono/core run file",
+    "devcore": "pnpm --filter @hydration_nodehono/core run dev"
   },
-  "dependencies": {
-    "hono": "^3.9.0",
-    "sortablejs": "^1.15.0"
-  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20230914.0",
-    "@hono/vite-cloudflare-pages": "^0.0.2",
-    "@hono/vite-dev-server": "^0.0.12",
-    "@types/alpinejs": "^3.13.3",
-    "@types/sortablejs": "^1.15.5",
-    "alpinejs": "^3.13.2",
-    "vite": "^4.5.0",
-    "wrangler": "^3.14.0"
+    "typescript": "^5.2.2"
   }
 }

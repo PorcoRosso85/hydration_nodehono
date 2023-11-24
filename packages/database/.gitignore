@@ -9,7 +9,4 @@ package-lock.json
 yarn.lock
 pnpm-lock.yaml
 sqlite3.db
-.dbeaver
-*Scripts
-*.project
-*test.db
+migrations

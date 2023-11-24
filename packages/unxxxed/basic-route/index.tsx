@@ -4,6 +4,7 @@ import { BasicRouteIndex } from "./components";
 import { BasicRouteCountTarget } from "./components/Count";
 import { BasicRouteCountIncrement } from "./components/CountIncrement";
 import { Products } from "./components/Products";
+import { Tunnel } from "./components/Tunnel";
 
 const basicRoute = new Hono();
 basicRoute
@@ -45,6 +46,13 @@ basicRoute
   })
   .post("/cart/add", async (c) => {
     return c.text("Added to cart");
+  })
+  .get("/tunnel", (c) => {
+    return c.render(
+      <>
+        <Tunnel text="hi, tunnel" />
+      </>
+    );
   });
 
 export default basicRoute;
