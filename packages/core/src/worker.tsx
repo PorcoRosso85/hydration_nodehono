@@ -2,7 +2,7 @@ import { Hono } from "hono";
 // import { Layout } from "./layout";
 import { sortHonoApp } from "@hydration_hononode/sort";
 import { paymentConfig, paymentHonoApp } from "@petittech/payment";
-import { databaseConfig, databaseHonoApp } from "@petittech/database";
+// import { databaseConfig, databaseHonoApp } from "@petittech/database";
 import { aboutHonoApp } from "@petittech/about";
 import { coreHonoApp } from "./routes";
 
