@@ -36,6 +36,6 @@
     "alpinejs": "^3.13.2",
     "vite": "^4.5.0",
     "vite-node": "^0.34.6",
-    "wrangler": "^3.14.0"
+    "wrangler": "^3.16.0"
   }
 }
