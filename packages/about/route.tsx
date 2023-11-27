@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { Profile } from "./Profile";
+import { Profile, profileData } from "./Profile";
 import { Contact } from "./Contact";
 import { articlesHonoApp } from "@petittech/articles";
 import { worksHonoApp } from "@petittech/works"
@@ -8,7 +8,7 @@ const app = new Hono();
 
 app
   .get("/", (c) => {
-    return c.html(<Profile />);
+    return c.html(<Profile profileData={profileData}/>);
   })
 
   // .get("/list", (c) => {

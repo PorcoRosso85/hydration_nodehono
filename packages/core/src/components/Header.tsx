@@ -139,7 +139,7 @@ header {
     <>
       <header class="header">
         <style>{style}</style>
-        <a hx-get="/about" class="logo" hx-target="#main">
+        <a hx-get="/about" class="logo" hx-target="#main" hx-push-url="true">
           Tetsuya Takasawa
         </a>
         <input class="menu-btn" type="checkbox" id="menu-btn" />
