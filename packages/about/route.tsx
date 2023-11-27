@@ -1,15 +1,14 @@
 import { Hono } from "hono";
-import { marked } from "marked";
-import { Contact, Profile } from "./Profile";
-import md from "./sample.md";
-
-import { articles } from "./Profile";
+import { Profile } from "./Profile";
+import { Contact } from "./Contact";
+import { articlesHonoApp } from "@petittech/articles";
+import { worksHonoApp } from "@petittech/works"
 
 const app = new Hono();
 
 app
   .get("/", (c) => {
-    return c.render(<Profile articles={articles} />);
+    return c.html(<Profile />);
   })
 
   // .get("/list", (c) => {
@@ -21,7 +20,7 @@ app
   // });
 
   .get("/contact", (c) => {
-    return c.render(<Contact />);
+    return c.html(<Contact />);
   })
   .post("/contact", async (c) => {
     const parsed = await c.req.parseBody();
@@ -33,4 +32,6 @@ app
     return c.text("");
   });
 
+app.route("/articles", articlesHonoApp);
+app.route("/works", worksHonoApp)
 export { app as aboutHonoApp };

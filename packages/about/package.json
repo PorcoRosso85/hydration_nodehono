@@ -10,6 +10,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@petittech/articles": "workspace:^",
+    "@petittech/works": "workspace:^",
     "hono": "^3.9.0",
     "marked": "^10.0.0"
   }

@@ -16,19 +16,27 @@ const app = new Hono();
 
 app
   .get("/", (c) => {
-    return c.render(
-      <>
-        <Works works={works} />
-      </>
+    return c.html(
+      <div class="">
+      <button hx-target="#target" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700" hx-get="/about/works/login">Login</button>
+      <button hx-target="#target" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700" hx-get="/about/works/nav">Navigation</button>
+      <button hx-target="#target" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700" hx-get="/about/works/dashboardsample">Dashboard Sample</button>
+      <button hx-target="#target" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700" hx-get="/about/works/payment">Payment</button>
+      <button hx-target="#target" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700" hx-get="/about/works/products">Products</button>
+      <button hx-target="#target" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700" hx-get="/about/works/price">Price</button>
+      <button hx-target="#target" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700" hx-get="/about/works/chat">Chat</button>
+      <button hx-target="#target" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700" hx-get="/about/works/table">Table</button>
+      <div id="target"></div>
+    </div>
     );
   })
-  .get("/dashboard", (c) => {
-    return c.render(
-      <>
-        <DashboardApp />
-      </>
-    );
-  })
+  // .get("/dashboard", (c) => {
+  //   return c.html(
+  //     <>
+  //       <DashboardApp />
+  //     </>
+  //   );
+  // })
   .get("/login", (c) => {
     return c.html(<Login />);
   })
@@ -55,5 +63,3 @@ app
   });
 
 export { app as worksHonoApp };
-
-const portfolios = [{}];

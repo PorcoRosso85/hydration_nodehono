@@ -23,7 +23,12 @@ app
   })
 
   .get("/", (c) => {
-    return c.render(<Add />);
+    return c.render(
+      <>
+        {/* <div hx-get="/about" hx-trigger="load, "></div> */}
+        <div hx-get="/about/articles" hx-trigger="load, "></div>
+      </>
+    );
   });
 
 export { app as coreHonoApp };
