@@ -15,8 +15,5 @@
   "license": "MIT",
   "devDependencies": {
     "typescript": "^5.2.2"
-  },
-  "dependencies": {
-    "wrangler": "^3.14.0"
   }
 }
