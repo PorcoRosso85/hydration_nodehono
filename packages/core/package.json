@@ -20,6 +20,7 @@
     "@hydration_hononode/sort": "workspace:^",
     "@petittech/about": "workspace:^",
     "@petittech/payment": "workspace:^",
+    "@quantic/htmx": "workspace:^",
     "hono": "^3.9.0",
     "htmx.org": "^1.9.8",
     "minisearch": "^6.2.0",

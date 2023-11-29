@@ -2,7 +2,7 @@ import { Hono } from 'hono'
 import { html } from 'hono/html'
 import type { FC } from 'hono/jsx'
 
-import * as Htmx from './components/Htmx'
+import { HtmxGet } from '@quantic/htmx'
 import { Meta } from './components/Meta'
 
 const Add: FC = () => {
@@ -27,7 +27,7 @@ app
     const reqs = [{ url: '/about/articles' }]
     return await c.render(
       <>
-        <Htmx.HtmxGet elt="button" reqs={reqs} trigger="load" />
+        <HtmxGet elt="button" reqs={reqs} trigger="load" />
       </>,
     )
   })
