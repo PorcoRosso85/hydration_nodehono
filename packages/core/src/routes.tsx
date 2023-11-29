@@ -15,28 +15,38 @@ const Add: FC = () => {
 const app = new Hono()
 
 app
-  .use('*', async (c, next) => {
-    // TODO: 指定のルートにhydrationする実装追加
-    await c.setRenderer((content) => {
-      return c.html(<Meta>{content}</Meta>)
-    })
-    await next()
-  })
+  // .use('*', async (c, next) => {
+  //   // TODO: 指定のルートにhydrationする実装追加
+  //   c.setRenderer((content) => {
+  //     return c.html(
+  //       <>
+  //         <Meta>{content}</Meta>
+  //       </>,
+  //     )
+  //   })
+  //   await next()
+  // })
 
   .get('/', async (c) => {
-    const reqs = [{ url: '/about/works' }]
-    return await c.render(
+    const reqs = [{ url: '/about' }, { url: '/about/works' }, { url: '/about/contact' }]
+    return await c.html(
       <>
-        <HtmxElement
-          elt="button"
-          method="get"
-          url={reqs[0].url}
-          trigger="load, click"
-          target="#target"
-        >
-          refresh
-        </HtmxElement>
-        <div id="target">target</div>
+        <Meta>
+          {reqs.map((req, index) => (
+            <div class="flex flex-col bg-white rounded shadow-lg p-12 mt-12">
+              <HtmxElement
+                elt="button"
+                method="get"
+                url={req.url}
+                trigger="load, click"
+                target={`#target_${index}`}
+              >
+                {req.url}
+              </HtmxElement>
+              <div id={`target_${index}`}>target</div>
+            </div>
+          ))}
+        </Meta>
       </>,
     )
   })

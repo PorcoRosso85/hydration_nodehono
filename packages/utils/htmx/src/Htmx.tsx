@@ -1,6 +1,12 @@
-type Requests = {
-  url: string
-}
+/**
+ *
+ * Htmxを呼ぶ際に使用できるコンポーネント
+ * getメソッドの場合はコンポーネントを呼ぶのではなく、
+ * getリクエストをするHtmxを呼ぶ
+ * このコンポーネントにより、リクエストと動的に連動させ、
+ * 記述量を削減する
+ *
+ */
 
 type HtmxProps = {
   elt: 'button' | 'div'
