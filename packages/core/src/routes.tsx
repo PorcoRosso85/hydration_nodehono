@@ -2,7 +2,7 @@ import { Hono } from 'hono'
 import { html } from 'hono/html'
 import type { FC } from 'hono/jsx'
 
-import { HtmxGet } from '@quantic/htmx'
+import { HtmxElement } from '@quantic/htmx'
 import { Meta } from './components/Meta'
 
 const Add: FC = () => {
@@ -24,10 +24,19 @@ app
   })
 
   .get('/', async (c) => {
-    const reqs = [{ url: '/about/articles' }]
+    const reqs = [{ url: '/about/works' }]
     return await c.render(
       <>
-        <HtmxGet elt="button" reqs={reqs} trigger="load" />
+        <HtmxElement
+          elt="button"
+          method="get"
+          url={reqs[0].url}
+          trigger="load, click"
+          target="#target"
+        >
+          refresh
+        </HtmxElement>
+        <div id="target">target</div>
       </>,
     )
   })

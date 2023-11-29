@@ -4,40 +4,35 @@ type Requests = {
 
 type HtmxProps = {
   elt: 'button' | 'div'
-  reqs: Requests[]
-  trigger: string
+  method: 'get' | 'post' | 'put' | 'delete'
+  // reqs: Requests[]
+  url: string
+  trigger?: string
+  target?: string
+  swap?: 'innerHTML' | 'outerHTML'
+  pushUrlHistory?: boolean
+  children?: any
 }
 
-export const HtmxGetButton = (props: HtmxProps) => {
-  return (
-    <>
-      {props.reqs.map((req) => (
-        <button type="button" hx-get={`${req.url}`} hx-trigger={`${props.trigger}`}>
-          {req.url}
-        </button>
-      ))}
-    </>
-  )
-}
-
-export const HtmxGetDiv = (props) => {
-  return props.reqs.map((req) => (
-    <div hx-get={`${req.url}`} hx-trigger={`${props.trigger}`}>
-      {req.url}
-    </div>
-  ))
-}
-
-export const HtmxGet = (props: HtmxProps) => {
+export const HtmxElement = (props: HtmxProps) => {
   const Element = props.elt
-
+  const hxMethodAttribute = {
+    get: { 'hx-get': props.url },
+    post: { 'hx-post': props.url },
+    put: { 'hx-put': props.url },
+    delete: { 'hx-delete': props.url },
+  }[props.method]
   return (
-    <>
-      {props.reqs.map((req, index) => (
-        <Element key={index} hx-get={`${req.url}`} hx-trigger={`${props.trigger}`}>
-          {req.url}
-        </Element>
-      ))}
-    </>
+    <Element
+      {...hxMethodAttribute}
+      {...(props.trigger && { 'hx-trigger': props.trigger })}
+      {...(props.target && { 'hx-target': props.target })}
+      {...(props.swap && { 'hx-swap': props.swap })}
+      {...(props.pushUrlHistory !== undefined && {
+        'hx-push-url': props.pushUrlHistory.toString(),
+      })}
+    >
+      {props.children}
+    </Element>
   )
 }

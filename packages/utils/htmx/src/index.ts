@@ -1,3 +1,3 @@
-import { HtmxGet } from './Htmx'
+import { HtmxElement } from './Htmx'
 
-export { HtmxGet }
+export { HtmxElement }
