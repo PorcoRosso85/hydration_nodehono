@@ -40,6 +40,7 @@ app
                 url={req.url}
                 trigger="load, click"
                 target={`#target_${index}`}
+                // pushUrlHistory="true"
               >
                 {req.url}
               </HtmxElement>

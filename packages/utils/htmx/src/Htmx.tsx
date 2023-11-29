@@ -9,14 +9,14 @@
  */
 
 type HtmxProps = {
-  elt: 'button' | 'div'
+  elt: 'button' | 'div' | 'a' | 'input'
   method: 'get' | 'post' | 'put' | 'delete'
   // reqs: Requests[]
   url: string
   trigger?: string
   target?: string
   swap?: 'innerHTML' | 'outerHTML'
-  pushUrlHistory?: boolean
+  pushUrlHistory?: 'true' | 'false'
   children?: any
 }
 
