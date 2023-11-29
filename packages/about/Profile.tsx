@@ -4,13 +4,13 @@ const renderProfileData = (data, isNested = false) => {
     if (typeof value === 'object' && !Array.isArray(value)) {
       return (
         <div key={key} class={isNested ? 'nested' : ''}>
-          <h3 class="text-lg mt-4">{key}</h3>
+          <h3 class="text-base mt-8">{key}</h3>
           {renderProfileData(value, true)} {/* 再帰呼び出し */}
         </div>
       )
     }
     // タプル形式の値を表示
-    return <p key={key} class="text-sm">{`${value[0]}: ${value[1]}`}</p>
+    return <p key={key} class="text-xs m-1">{`${value[0]}: ${value[1]}`}</p>
     // return (
     //   <tr>
     //     <td>{`${value[0]}`}</td>

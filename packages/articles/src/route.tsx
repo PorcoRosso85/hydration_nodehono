@@ -1,11 +1,20 @@
-import { Hono } from "hono";
-import { Articles } from "./Articles";
-import { articles } from "./contents/articls";
+import { Hono } from 'hono'
+import { Articles } from './Articles'
+import { articles } from './contents/articls'
 
-const app = new Hono();
+const app = new Hono()
 
-app.get("/", (c) => {
-  return c.html(<Articles articles={articles} />);
-});
+const endpoint = '/articles'
 
-export { app as articlesHonoApp };
+const endpoints = {
+  root: '/',
+}
+
+app.get(endpoints.root, (c) => {
+  return c.html(<Articles articles={articles} />)
+})
+
+export const articlesHonoApp = {
+  endpoint: endpoint,
+  app: app,
+}

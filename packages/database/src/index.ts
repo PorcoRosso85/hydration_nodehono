@@ -1,8 +1,13 @@
+/**
+ * This repo should not logic
+ *
+ */
+
 import { databaseConfig } from "./config";
 import { databaseHonoApp } from "./route";
 import { insertEmailSchema } from "./validator";
 import { TestQuery } from "./TestQuery";
-import { sqliteDatabase } from "./client";
+import { execute, db } from "./client";
 import * as databaseSchema from "./schema";
 
 export {
@@ -10,6 +15,7 @@ export {
   databaseConfig,
   databaseHonoApp,
   TestQuery,
-  sqliteDatabase,
+  execute,
+  db,
   databaseSchema,
 };

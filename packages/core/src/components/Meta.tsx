@@ -1,20 +1,17 @@
-import { html, raw } from "hono/html";
-import { Header } from "./Header";
+import { html, raw } from 'hono/html'
+import { Header } from './Header'
 
 export const Meta = (props) => {
   const style = `
 .reset-style, .reset-style * {
   all: revert;
 }
-  `;
+  `
   return (
     <html>
       <head>
         <meta name="robots" content="noindex" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
         {/* $ {import.meta.env.PROD
           ? raw(
               '<script type="module" src="/static/clients/index.js"></script>'
@@ -29,25 +26,25 @@ export const Meta = (props) => {
       <body class="font-mono">
         {/* <style>{style}</style> */}
         <Header />
-        <div style={"padding-top: 80px"}></div>
         {/* <Left /> */}
         <main id="main">{props.children}</main>
         {/* <Right /> */}
         {/* <Footer /> */}
       </body>
     </html>
-  );
-};
+  )
+}
 
 // TODO: html経由でmiddleware追加しているが、middlewareにtsつかえると思う
 const Hydration = () => {
   return html`
-    ${import.meta.env.PROD
-      ? raw('<script type="module" src="/static/client.js"></script>')
-      : raw('<script type="module" src="/src/clients/index.ts"></script>')}
-  `;
-};
-
+    ${
+      import.meta.env.PROD
+        ? raw('<script type="module" src="/static/client.js"></script>')
+        : raw('<script type="module" src="/src/clients/index.ts"></script>')
+    }
+  `
+}
 
 const Left = () => (
   <>
@@ -61,10 +58,7 @@ const Left = () => (
             <a href="#getting-set-up" class="font-semibold text-slate-900">
               Getting set up
             </a>
-            <ul
-              role="list"
-              class="mt-4 space-y-2 border-l border-slate-200 pl-6"
-            >
+            <ul role="list" class="mt-4 space-y-2 border-l border-slate-200 pl-6">
               <li>
                 <a href="#requirements">Requirements</a>
               </li>
@@ -79,14 +73,9 @@ const Left = () => (
             <a href="#using-react" class="font-semibold text-slate-900">
               Using React
             </a>
-            <ul
-              role="list"
-              class="mt-4 space-y-2 border-l border-slate-200 pl-6"
-            >
+            <ul role="list" class="mt-4 space-y-2 border-l border-slate-200 pl-6">
               <li>
-                <a href="#react-installing-dependencies">
-                  Installing dependencies
-                </a>
+                <a href="#react-installing-dependencies">Installing dependencies</a>
               </li>
               <li>
                 <a href="#react-creating-components">Creating components</a>
@@ -97,14 +86,9 @@ const Left = () => (
             <a href="#using-vue" class="font-semibold text-slate-900">
               Using Vue
             </a>
-            <ul
-              role="list"
-              class="mt-4 space-y-2 border-l border-slate-200 pl-6"
-            >
+            <ul role="list" class="mt-4 space-y-2 border-l border-slate-200 pl-6">
               <li>
-                <a href="#vue-installing-dependencies">
-                  Installing dependencies
-                </a>
+                <a href="#vue-installing-dependencies">Installing dependencies</a>
               </li>
               <li>
                 <a href="#vue-creating-components">Creating components</a>
@@ -112,16 +96,10 @@ const Left = () => (
             </ul>
           </li>
           <li>
-            <a
-              href="#using-html-and-your-own-js"
-              class="font-semibold text-slate-900"
-            >
+            <a href="#using-html-and-your-own-js" class="font-semibold text-slate-900">
               Using HTML and your own JS
             </a>
-            <ul
-              role="list"
-              class="mt-4 space-y-2 border-l border-slate-200 pl-6"
-            >
+            <ul role="list" class="mt-4 space-y-2 border-l border-slate-200 pl-6">
               <li>
                 <a href="#html-accessibility">Accessibility considerations</a>
               </li>
@@ -132,23 +110,15 @@ const Left = () => (
                 <a href="#html-transitions">Transitions</a>
               </li>
               <li>
-                <a href="#html-creating-partials-components">
-                  Creating partials/components
-                </a>
+                <a href="#html-creating-partials-components">Creating partials/components</a>
               </li>
             </ul>
           </li>
           <li>
-            <a
-              href="#resources-and-assets"
-              class="font-semibold text-slate-900"
-            >
+            <a href="#resources-and-assets" class="font-semibold text-slate-900">
               Resources &amp; assets
             </a>
-            <ul
-              role="list"
-              class="mt-4 space-y-2 border-l border-slate-200 pl-6"
-            >
+            <ul role="list" class="mt-4 space-y-2 border-l border-slate-200 pl-6">
               <li>
                 <a href="#resources-icons">Icons</a>
               </li>
@@ -167,12 +137,12 @@ const Left = () => (
       </div>
     </aside>
   </>
-);
+)
 const Right = () => (
   <>
     <aside class="col-span-3 bg-gray-600">Right.</aside>
   </>
-);
+)
 
 const Footer = () => {
   const style = `
@@ -183,7 +153,7 @@ footer {
   z-index: 3;
 }
   
-  `;
+  `
   return (
     <>
       <style>{style}</style>
@@ -191,7 +161,7 @@ footer {
         <h2>contact</h2>
       </footer>
     </>
-  );
-};
+  )
+}
 
-export default Meta;
+export default Meta
