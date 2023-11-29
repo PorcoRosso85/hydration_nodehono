@@ -12,86 +12,44 @@ import { Price } from './dashboard/Price'
 import { ProductsGrid } from './dashboard/ProductsGrid'
 import { Table } from './dashboard/Table'
 
+import { HtmxElement } from '@quantic/htmx'
+
 const app = new Hono()
 
 const endpoint = '/works'
 
 const endpoints = {
   root: '/',
+  login: '/login',
+  nav: '/nav',
+  dashboard: '/dashboardsample',
+  products: '/products',
+  price: '/price',
+  payment: '/payment',
+  chat: '/chat',
+  table: '/table',
 }
 
 app
   .get(endpoints.root, (c) => {
     return c.html(
       <div class="">
-        <button
-          type="button"
-          hx-target="#target"
-          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-          hx-get="/about/works/login"
-        >
-          Login
-        </button>
-        <button
-          type="button"
-          hx-target="#target"
-          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-          hx-get="/about/works/nav"
-        >
-          Navigation
-        </button>
-        <button
-          type="button"
-          hx-target="#target"
-          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-          hx-get="/about/works/dashboardsample"
-        >
-          Dashboard Sample
-        </button>
-        <button
-          type="button"
-          hx-target="#target"
-          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-          hx-get="/about/works/payment"
-        >
-          Payment
-        </button>
-        <button
-          type="button"
-          hx-target="#target"
-          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-          hx-get="/about/works/products"
-        >
-          Products
-        </button>
-        <button
-          type="button"
-          hx-target="#target"
-          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-          hx-get="/about/works/price"
-        >
-          Price
-        </button>
-        <button
-          type="button"
-          hx-target="#target"
-          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-          hx-get="/about/works/chat"
-        >
-          Chat
-        </button>
-        <button
-          type="button"
-          hx-target="#target"
-          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-          hx-get="/about/works/table"
-        >
-          Table
-        </button>
-        <div id="target" />
+        {Object.values(endpoints).map((value) => (
+          <HtmxElement
+            elt="button"
+            method="get"
+            url={`/about${endpoint}${value}`}
+            class="bg-blue-300 text-white py-1 px-2 rounded hover:bg-blue-500 m-2"
+            target="#target"
+          >
+            {value}
+          </HtmxElement>
+        ))}
+        <div id="target" class="mt-8" />
       </div>,
     )
   })
+
   // .get("/dashboard", (c) => {
   //   return c.html(
   //     <>
@@ -99,27 +57,35 @@ app
   //     </>
   //   );
   // })
+  //
   .get('/login', (c) => {
     return c.html(<Login />)
   })
+
   .get('/nav', (c) => {
     return c.html(<NavAndIcon />)
   })
+
   .get('/dashboardsample', (c) => {
     return c.html(<DashBoard />)
   })
-  .get('/payment', (c) => {
-    return c.html(<Payment />)
-  })
+
   .get('/products', (c) => {
     return c.html(<ProductsGrid />)
   })
+
   .get('/price', (c) => {
     return c.html(<Price />)
   })
+
+  .get('/payment', (c) => {
+    return c.html(<Payment />)
+  })
+
   .get('/chat', (c) => {
     return c.html(<Chat />)
   })
+
   .get('/table', (c) => {
     return c.html(<Table />)
   })
