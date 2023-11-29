@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { html } from 'hono/html'
 import type { FC } from 'hono/jsx'
 
+import * as Htmx from './components/Htmx'
 import { Meta } from './components/Meta'
 
 const Add: FC = () => {
@@ -16,17 +17,17 @@ const app = new Hono()
 app
   .use('*', async (c, next) => {
     // TODO: 指定のルートにhydrationする実装追加
-    c.setRenderer((content) => {
+    await c.setRenderer((content) => {
       return c.html(<Meta>{content}</Meta>)
     })
     await next()
   })
 
-  .get('/', (c) => {
-    return c.render(
+  .get('/', async (c) => {
+    const reqs = [{ url: '/about/articles' }]
+    return await c.render(
       <>
-        {/* <div hx-get="/about" hx-trigger="load, "></div> */}
-        <div hx-get="/about/articles" hx-trigger="load, "></div>
+        <Htmx.HtmxGet elt="button" reqs={reqs} trigger="load" />
       </>,
     )
   })

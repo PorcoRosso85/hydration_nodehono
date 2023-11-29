@@ -1,20 +1,18 @@
-const RouteButtons = function () {
-  return (
-    <ul class="menu" hx-target="#main">
-      <li>
-        <a hx-get="/about">About</a>
-      </li>
-      <li>
-        <a hx-get="/about/works">Works</a>
-      </li>
-      <li>
-        <a hx-get="/about/articles">Articles</a>
-      </li>
-      <li>
-        <a hx-get="/about/contact">Contact</a>
-      </li>
-    </ul>
-  );
-};
+const RouteButtons = () => (
+  <ul class="menu" hx-target="#main">
+    <li>
+      <button hx-get="/about">About</button>
+    </li>
+    <li>
+      <button hx-get="/about/works">Works</button>
+    </li>
+    <li>
+      <button hx-get="/about/articles">Articles</button>
+    </li>
+    <li>
+      <button hx-get="/about/contact">Contact</button>
+    </li>
+  </ul>
+)
 
-export { RouteButtons };
+export { RouteButtons }
