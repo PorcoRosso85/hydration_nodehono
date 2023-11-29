@@ -138,18 +138,18 @@ export const Header = () => {
 
   return (
     <>
+      <style>{style}</style>
       <header class="header">
-        <style>{style}</style>
         <HtmxElement elt="a" method="get" url="/" target="body">
           <p hx-push-url="true" class="text-3xl">
             Tetsuya Takasawa
           </p>
         </HtmxElement>
-        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        {/* <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn">
           <span class="navicon bg-gray-800 h-0.5 w-4.5 relative transition duration-200 ease-out" />
         </label>
-        <RouteButtons />
+        <RouteButtons /> */}
       </header>
     </>
   )
