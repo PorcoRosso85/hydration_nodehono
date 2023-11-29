@@ -25,7 +25,7 @@ app
     ]
     const style = `
     .box-shadow {
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 0px 0px rgba(0,0,0,0.24);
       transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     }
     
@@ -35,9 +35,10 @@ app
     `
     return c.html(
       <>
+        <style>{style}</style>
         {urls.map((url, index) => (
           <>
-            <details key={index} class="mt-8 ">
+            <details key={index} class="mt-4 box-shadow p-5">
               <summary class="font-semibold">{url}</summary>
               <HtmxElement
                 elt="div"
