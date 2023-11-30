@@ -21,7 +21,6 @@
     "@petittech/about": "workspace:^",
     "@petittech/payment": "workspace:^",
     "@quantic/htmx": "workspace:^",
-    "hono": "^3.9.0",
     "htmx.org": "^1.9.8",
     "minisearch": "^6.2.0",
     "sortablejs": "^1.15.0",
@@ -33,9 +32,6 @@
     "@hono/vite-dev-server": "^0.0.12",
     "@types/alpinejs": "^3.13.3",
     "@types/sortablejs": "^1.15.5",
-    "alpinejs": "^3.13.2",
-    "vite": "^4.5.0",
-    "vite-node": "^0.34.6",
-    "wrangler": "^3.16.0"
+    "alpinejs": "^3.13.2"
   }
 }
