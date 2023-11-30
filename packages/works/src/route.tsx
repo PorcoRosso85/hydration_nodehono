@@ -1,8 +1,5 @@
+import { HtmxElement } from '@quantic/htmx'
 import { Hono } from 'hono'
-import { Works } from './Works'
-
-import { works } from './Works'
-import { DashboardApp } from './dashboard/App'
 import { Chat } from './dashboard/Chat'
 import { DashBoard } from './dashboard/DashBoard'
 import { Login } from './dashboard/Login'
@@ -10,13 +7,10 @@ import { NavAndIcon } from './dashboard/NavAndIcon'
 import { Payment } from './dashboard/Payment'
 import { Price } from './dashboard/Price'
 import { ProductsGrid } from './dashboard/ProductsGrid'
-import { Table } from './dashboard/Table'
-
-import { HtmxElement } from '@quantic/htmx'
 
 const app = new Hono()
 
-const endpoint = '/works'
+const endpoint = '/about/works'
 
 const endpoints = {
   root: '/',
@@ -27,7 +21,6 @@ const endpoints = {
   price: '/price',
   payment: '/payment',
   chat: '/chat',
-  table: '/table',
 }
 
 app
@@ -38,7 +31,7 @@ app
           <HtmxElement
             elt="button"
             method="get"
-            url={`/about${endpoint}${value}`}
+            url={`${endpoint}${value}`}
             class="bg-blue-300 text-white py-1 px-2 rounded hover:bg-blue-500 m-2"
             target="#target"
           >
@@ -84,10 +77,6 @@ app
 
   .get('/chat', (c) => {
     return c.html(<Chat />)
-  })
-
-  .get('/table', (c) => {
-    return c.html(<Table />)
   })
 
 export const worksHonoApp = {

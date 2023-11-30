@@ -1,5 +1,6 @@
 import { articlesHonoApp } from '@petittech/articles'
 import { worksHonoApp } from '@petittech/works'
+import { tableHonoApp } from '@petittech/works/src/tableRows/route'
 import { HtmxElement } from '@quantic/htmx'
 import { Hono } from 'hono'
 import { Contact } from './Contact'
@@ -18,10 +19,11 @@ const endpoints = {
 app
   .get(endpoints.root, async (c) => {
     const urls = [
-      `${endpoint}${worksHonoApp.endpoint}`,
+      worksHonoApp.endpoint,
       `${endpoint}${endpoints.contact}`,
       `${endpoint}${endpoints.profile}`,
       `${endpoint}${articlesHonoApp.endpoint}`,
+      tableHonoApp.endpoint,
     ]
     const style = `
     .box-shadow {
@@ -86,7 +88,6 @@ app
   })
 
 app.route(articlesHonoApp.endpoint, articlesHonoApp.app)
-app.route(worksHonoApp.endpoint, worksHonoApp.app)
 
 export const aboutHonoApp = {
   endpoint: endpoint,

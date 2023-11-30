@@ -17,7 +17,8 @@
     "@biomejs/biome": "^1.4.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.4",
-    "vite-node": "^0.34.6"
+    "vite-node": "^0.34.6",
+    "wrangler": "^3.17.1"
   },
   "dependencies": {
     "hono": "^3.9.0"
