@@ -11,31 +11,30 @@
 
 // export { sqliteDatabase };
 
-import connect from "@databases/sqlite";
-import { countLikes, getTweet } from "./queries";
+import Database from 'better-sqlite3'
 
 // check type of result
-export const sql = async <T = unknown>(db, query): Promise<T> => {
+export const execute = async <T = unknown>(db, query): Promise<T> => {
   try {
-    const results = await db.query(query);
-    console.debug(results);
-    return results as T;
+    const results = await db.prepare(query)
+    console.debug(results)
+    return results as T
   } catch (err) {
-    console.error(err);
-    throw err;
+    console.error(err)
+    throw err
   }
-};
+}
 
-const db = connect("../../ln_test.db");
+export const db = (path: string) => Database(path)
 
-sql(db, getTweet(1)).catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+// execute(db, getTweet(1)).catch((err) => {
+//   console.error(err);
+//   process.exit(1);
+// });
 
-sql(db, countLikes(1)).catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+// execute(db, countLikes(1)).catch((err) => {
+//   console.error(err);
+//   process.exit(1);
+// });
 
-db.dispose();
+// db.dispose();

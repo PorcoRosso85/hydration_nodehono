@@ -1,6 +1,6 @@
 const Contact = () => {
   return (
-    <div class="h-[600px] bg-white flex flex-col justify-center items-center">
+    <div class="flex flex-col justify-center items-center">
       <div class="space-y-4">
         <input
           name="email"
@@ -29,6 +29,7 @@ const Contact = () => {
           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
         />
         <button
+          type="button"
           hx-post="/about/contact"
           hx-include="[name='email'], [name='first-name'], [name='last-name'], [name='message']"
           hx-swap="none"
@@ -38,7 +39,7 @@ const Contact = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export { Contact}
+export { Contact }

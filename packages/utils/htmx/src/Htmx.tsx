@@ -17,6 +17,7 @@ type HtmxProps = {
   target?: string
   swap?: 'innerHTML' | 'outerHTML'
   pushUrlHistory?: 'true' | 'false'
+  class?: string
   children?: any
 }
 
@@ -37,6 +38,7 @@ export const HtmxElement = (props: HtmxProps) => {
       {...(props.pushUrlHistory !== undefined && {
         'hx-push-url': props.pushUrlHistory.toString(),
       })}
+      {...(props.class && { class: props.class })}
     >
       {props.children}
     </Element>

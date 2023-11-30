@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { html } from 'hono/html'
 import type { FC } from 'hono/jsx'
 
+import { aboutHonoApp } from '@petittech/about'
 import { HtmxElement } from '@quantic/htmx'
 import { Meta } from './components/Meta'
 
@@ -13,6 +14,10 @@ const Add: FC = () => {
 }
 
 const app = new Hono()
+const endpoint = '/'
+const endpoints = {
+  root: endpoint,
+}
 
 app
   // .use('*', async (c, next) => {
@@ -27,24 +32,24 @@ app
   //   await next()
   // })
 
-  .get('/', async (c) => {
-    const reqs = [{ url: '/about' }, { url: '/about/works' }, { url: '/about/contact' }]
+  .get(endpoints.root, async (c) => {
+    const urls = [aboutHonoApp.endpoint]
     return await c.html(
       <>
         <Meta>
-          {reqs.map((req, index) => (
+          {urls.map((url, index) => (
             <div class="flex flex-col bg-white rounded shadow-lg p-12 mt-12">
               <HtmxElement
                 elt="button"
                 method="get"
-                url={req.url}
-                trigger="load, click"
+                url={url}
+                trigger="load, click" // クリックして再読み込みしたいときに
                 target={`#target_${index}`}
                 // pushUrlHistory="true"
               >
-                {req.url}
+                {url}
               </HtmxElement>
-              <div id={`target_${index}`}>target</div>
+              <div id={`target_${index}`} />
             </div>
           ))}
         </Meta>
@@ -53,6 +58,6 @@ app
   })
 
 export const coreHonoApp = {
-  endpoint: '/',
+  endpoint: endpoint,
   app: app,
 }

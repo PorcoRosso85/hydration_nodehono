@@ -12,6 +12,7 @@
   "dependencies": {
     "@petittech/articles": "workspace:^",
     "@petittech/works": "workspace:^",
+    "@quantic/htmx": "workspace:^",
     "hono": "^3.9.0",
     "marked": "^10.0.0"
   }

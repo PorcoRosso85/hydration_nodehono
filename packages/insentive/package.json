@@ -11,5 +11,9 @@
   "license": "MIT",
   "devDependencies": {
     "vite-node": "^0.34.6"
+  },
+  "dependencies": {
+    "@quantic/database": "workspace:^",
+    "sql-template-tag": "^5.1.0"
   }
 }
