@@ -18,6 +18,7 @@ type HtmxProps = {
   swap?: 'innerHTML' | 'outerHTML'
   include?: string
   pushUrlHistory?: 'true' | 'false'
+  confirm?: string
   class?: string
   children?: any
 }
@@ -38,6 +39,7 @@ export const HtmxElement = (props: HtmxProps) => {
       {...(props.target && { 'hx-target': props.target })}
       {...(props.swap && { 'hx-swap': props.swap })}
       {...(props.include && { 'hx-include': props.include })}
+      {...(props.confirm && { 'hx-confirm': props.confirm })}
       {...(props.pushUrlHistory !== undefined && {
         'hx-push-url': props.pushUrlHistory.toString(),
       })}

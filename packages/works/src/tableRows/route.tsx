@@ -1,8 +1,6 @@
 import { HtmxElement } from '@quantic/htmx'
 import { Hono } from 'hono'
 import { logger } from 'hono/logger'
-import { DataCells, Rows } from './Rows'
-import { Table } from './Table'
 
 import { contactsListData } from '../../../../sampleData/formTargetData'
 
@@ -41,21 +39,15 @@ app
           </thead>
           <tbody>
             {contactsListData.map((contact, index) => (
-              // TODO: rows.rootを再取得すべき
-              // TODO: LazyLoading拡張可能にすべき
+              // TODO: LazyLoading拡張可能に
+              // TODO: ブロックごとにリクエスト
               <HtmxElement
                 elt="tr"
                 method="get"
-                url={`${endpoint}${endpoints.rows.edit}`}
-                trigger="dblclick"
-                target="this"
+                url={`${endpoint}${endpoints.rows.root}/${contact.id}`}
                 swap="outerHTML"
-              >
-                <td class="pl-2 pr-2">{contact.id}</td>
-                <td class="pl-2 pr-2">{contact.firstname}</td>
-                <td class="pl-2 pr-2">{contact.lastname}</td>
-                <td class="pl-2 pr-2">{contact.email}</td>
-              </HtmxElement>
+                trigger="load"
+              />
             ))}
           </tbody>
         </table>
@@ -63,31 +55,75 @@ app
     )
   })
 
-  .get(endpoints.rows.root, (c) => {
-    return c.html(<>{/* <>rows.root</> */}</>)
+  .get(`${endpoints.rows.root}/:id`, (c) => {
+    const id = c.req.param('id')
+    // console.debug('id', id)
+    const contact = contactsListData.find((contact) => contact.id === id)
+    return c.html(
+      <>
+        <HtmxElement
+          elt="tr"
+          method="post"
+          url={`${endpoint}${endpoints.rows.edit}`}
+          trigger="dblclick"
+          target="this"
+          swap="outerHTML"
+          // include="[name='hidden-id-input']"
+          include="find td"
+        >
+          <td class="pl-2 pr-2">
+            {contact.id}
+            <input type="hidden" name="hidden-id-input" value={contact.id} />
+          </td>
+          <td class="pl-2 pr-2">{contact.firstname}</td>
+          <td class="pl-2 pr-2">{contact.lastname}</td>
+          <td class="pl-2 pr-2">{contact.email}</td>
+        </HtmxElement>
+      </>,
+    )
   })
 
-  .get(endpoints.rows.edit, (c) => {
+  .post(endpoints.rows.edit, async (c) => {
+    const parsed = await c.req.parseBody()
+    const id = parsed['hidden-id-input']
+    console.debug(id)
+    const contact = contactsListData.find((contact) => contact.id === id)
     return c.html(
-      <tr>
-        <td>id</td>
+      <tr class="text-indigo-800">
+        <td>{contact ? contact.id : ''}</td>
         <td>
-          <input type="text" name="firstname" placeholder="firstname" />
+          <input
+            type="text"
+            name="firstname"
+            placeholder="firstname"
+            value={contact ? contact.firstname : ''}
+          />
         </td>
         <td>
-          <input type="text" name="lastname" placeholder="lastname" />
+          <input
+            type="text"
+            name="lastname"
+            placeholder="lastname"
+            value={contact ? contact.lastname : ''}
+          />
         </td>
         <td>
-          <input type="email" name="email" placeholder="email" />
+          <input
+            type="email"
+            name="email"
+            placeholder="email"
+            value={contact ? contact.email : ''}
+          />
         </td>
         <td>
           <HtmxElement
             elt="button"
             method="post"
-            url={`${endpoint}${endpoints.rows.save}`}
+            url={`${endpoint}${endpoints.rows.save}/${contact.id}`}
             include="closest tr"
             swap="outerHTML"
             target="closest tr"
+            confirm="Are you sure?"
           >
             EDS
           </HtmxElement>
@@ -96,24 +132,28 @@ app
     )
   })
 
-  .post(endpoints.rows.save, async (c) => {
+  .post(`${endpoints.rows.save}/:id`, async (c) => {
+    const id = await c.req.param('id')
+    console.debug('id: ', id)
     const parsed = await c.req.parseBody()
     const firstname = parsed['firstname']
+    const lastname = parsed['lastname']
+    const email = parsed['email']
     console.debug(firstname)
     // TODO: 200を返す＝DB操作が無事完了したことが前提
-    // TODO: rows.rootを再取得すべき
+    // TODO: サーバーの内容を返すべき, 結果としてrows.rootエンドポイントで全取得したものと同じであるべき
     return c.html(
       <HtmxElement
         elt="tr"
         method="get"
-        url={`${endpoint}${endpoints.rows.edit}`}
-        trigger="dblclick"
-        target="this"
+        url={`${endpoint}${endpoints.rows.root}/${id}`}
         swap="outerHTML"
       >
-        <td>saved</td>
-        <td>saved</td>
-        <td>saved</td>
+        {/* TODO: DB登録を確認後、登録したrowデータを返す   */}
+        <td>{id}</td>
+        <td>{firstname}</td>
+        <td>{lastname}</td>
+        <td>{email}</td>
       </HtmxElement>,
     )
   })
