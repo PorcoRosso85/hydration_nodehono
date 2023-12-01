@@ -15,8 +15,9 @@ type HtmxProps = {
   url: string
   trigger?: string
   target?: string
-  swap?: 'innerHTML' | 'outerHTML'
+  swap?: 'innerHTML' | 'outerHTML' | 'beforeend'
   include?: string
+  on?: string
   pushUrlHistory?: 'true' | 'false'
   confirm?: string
   class?: string
@@ -39,6 +40,7 @@ export const HtmxElement = (props: HtmxProps) => {
       {...(props.target && { 'hx-target': props.target })}
       {...(props.swap && { 'hx-swap': props.swap })}
       {...(props.include && { 'hx-include': props.include })}
+      {...(props.on && { 'hx-on': props.on })}
       {...(props.confirm && { 'hx-confirm': props.confirm })}
       {...(props.pushUrlHistory !== undefined && {
         'hx-push-url': props.pushUrlHistory.toString(),
