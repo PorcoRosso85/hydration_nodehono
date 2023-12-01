@@ -1,3 +1,4 @@
-import { worksHonoApp } from "./route";
+import { closeModal } from './modal/client'
+import { worksHonoApp } from './route'
 
-export { worksHonoApp };
+export { worksHonoApp, closeModal }
