@@ -4,6 +4,7 @@ import type { FC } from 'hono/jsx'
 
 import { aboutHonoApp } from '@petittech/about'
 import { modalHonoApp } from '@petittech/works/src/modal/route'
+import { toastHonoApp } from '@petittech/works/src/toast/route'
 import { HtmxElement } from '@quantic/htmx'
 import { Meta } from './components/Meta'
 
@@ -34,7 +35,7 @@ app
   // })
 
   .get(endpoints.root, async (c) => {
-    const urls = [aboutHonoApp.endpoint, modalHonoApp.endpoint]
+    const urls = [aboutHonoApp.endpoint, modalHonoApp.endpoint, toastHonoApp.endpoint]
     return await c.html(
       <>
         <Meta>

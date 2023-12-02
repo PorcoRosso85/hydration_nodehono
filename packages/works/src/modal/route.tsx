@@ -120,7 +120,7 @@ app
     return c.html(
       <>
         <style>{style}</style>
-        {/* <div id="modal" x-data="{open: true}" x-show="open">
+        <div id="modal" x-data="{open: true}" x-show="open">
           {html`<div class="modal-underlay" @click="open = false" />`}
           <div class="modal-content bg-white p-10 m-10">
             <h1>Modal Dialog</h1>
@@ -134,8 +134,8 @@ app
               Close
             </button>`}
           </div>
-        </div> */}
-        <div id="modal">
+        </div>
+        {/* <div id="modal">
           <div class="modal-underlay" />
           <div class="modal-content bg-white p-10 m-10">
             <h1>Modal Dialog</h1>
@@ -146,7 +146,7 @@ app
               Close
             </button>
           </div>
-        </div>
+        </div> */}
       </>,
     )
   })

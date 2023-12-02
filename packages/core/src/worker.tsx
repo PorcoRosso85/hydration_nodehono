@@ -5,6 +5,7 @@ import { paymentConfig, paymentHonoApp } from '@petittech/payment'
 import { worksHonoApp } from '@petittech/works'
 import { modalHonoApp } from '@petittech/works/src/modal/route'
 import { tableHonoApp } from '@petittech/works/src/tableRows/route'
+import { toastHonoApp } from '@petittech/works/src/toast/route'
 import { Hono } from 'hono'
 import { coreHonoApp } from './routes'
 
@@ -14,5 +15,6 @@ app.route(aboutHonoApp.endpoint, aboutHonoApp.app)
 app.route(worksHonoApp.endpoint, worksHonoApp.app)
 app.route('/', tableHonoApp.app)
 app.route('/', modalHonoApp.app)
+app.route('/', toastHonoApp.app)
 
 export default app
