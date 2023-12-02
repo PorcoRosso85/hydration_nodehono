@@ -7,7 +7,7 @@ import { sortHydration } from '@hydration_hononode/sort'
 //   createTunnelEffect,
 //   updateTunnelPosition,
 // } from "../../../unxxxed/basic-route/components/client";
-import { closeModal, noticesHandler } from '@petittech/works'
+import { closeModal, mapLibre, noticesHandler } from '@petittech/works'
 import Alpine from 'alpinejs'
 
 // お悩みポイント 1
@@ -35,5 +35,6 @@ window.addEventListener('DOMContentLoaded', sortHydration)
 // document.addEventListener("DOMContentLoaded", createTunnelEffect);
 // window.addEventListener("scroll", updateTunnelPosition);
 
-closeModal()
+// closeModal()
 noticesHandler()
+// mapLibre()

@@ -8,6 +8,7 @@ import { Payment } from './dashboard/Payment'
 import { Price } from './dashboard/Price'
 import { ProductsGrid } from './dashboard/ProductsGrid'
 import { Dropdown } from './dropdown'
+import { Maplibre } from './map'
 import { Toast } from './toast'
 
 const app = new Hono()
@@ -24,6 +25,7 @@ const endpoints = {
   payment: '/payment',
   chat: '/chat',
   dropdown: '/dropdown',
+  map: '/map',
 }
 
 app
@@ -83,6 +85,9 @@ app
   })
   .get(endpoints.dropdown, (c) => {
     return c.html(<Dropdown />)
+  })
+  .get(endpoints.map, (c) => {
+    return c.html(<Maplibre />)
   })
 
 export const worksHonoApp = {

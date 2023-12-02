@@ -49,6 +49,7 @@ app
         >
           Error
         </button> */}
+        {/* TODO: beforeendでbodyのどこかにmodalのように追加 */}
         <HtmxElement
           elt="button"
           method="get"
