@@ -1,5 +1,6 @@
 import { HtmxElement } from '@quantic/htmx'
 import { Hono } from 'hono'
+import { ImageInCanvas, ScriptImageInCanvas } from './canvas'
 import { Chat } from './dashboard/Chat'
 import { DashBoard } from './dashboard/DashBoard'
 import { Login } from './dashboard/Login'
@@ -26,6 +27,7 @@ const endpoints = {
   chat: '/chat',
   dropdown: '/dropdown',
   map: '/map',
+  imagecanvas: '/imagecanvas',
 }
 
 app
@@ -88,6 +90,23 @@ app
   })
   .get(endpoints.map, (c) => {
     return c.html(<Maplibre />)
+  })
+  .get(endpoints.imagecanvas, (c) => {
+    return c.html(
+      <>
+        hi
+        <ScriptImageInCanvas />
+        <HtmxElement elt="div" method="get" url={`${endpoint}${endpoints.imagecanvas}/component`} />
+      </>,
+    )
+  })
+  .get(`${endpoints.imagecanvas}/component`, (c) => {
+    return c.html(
+      <>
+        hi
+        <ImageInCanvas />
+      </>,
+    )
   })
 
 export const worksHonoApp = {
