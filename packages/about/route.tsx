@@ -20,11 +20,10 @@ const endpoints = {
 app
   .get(endpoints.root, async (c) => {
     const urls = [
-      worksHonoApp.endpoint,
-      `${endpoint}${endpoints.contact}`,
-      `${endpoint}${endpoints.profile}`,
-      `${endpoint}${articlesHonoApp.endpoint}`,
-      tableHonoApp.endpoint,
+      [`${endpoint}${endpoints.profile}`, '経歴'],
+      [worksHonoApp.endpoint, '制作サンプル'],
+      [`${endpoint}${endpoints.contact}`, '連絡フォーム'],
+      [`${endpoint}${articlesHonoApp.endpoint}`, '記事サンプル'],
     ]
     const style = `
     .box-shadow {
@@ -40,19 +39,21 @@ app
       <>
         <style>{style}</style>
         {urls.map((url, index) => (
-          <>
-            <details key={index} class="mt-4 box-shadow p-5">
-              <summary class="font-semibold">{url}</summary>
-              <HtmxElement
-                elt="div"
-                method="get"
-                url={url}
-                trigger="load"
-                // target={`#about_target_${index}`}
-              />
-              {/* <div id={`about_target_${index}`} /> */}
-            </details>
-          </>
+          <div class="box-shadow pt-2">
+            <HtmxElement
+              elt="button"
+              method="get"
+              url={url[0]}
+              target="next div"
+              pushUrlHistory="true"
+              class='"overflow-hidden md:max-w-2xs my-5 transform translate-y-1 hover:translate-y-0 duration-500 ease-in-out"'
+            >
+              <span>
+                {url[0]}: {url[1]}
+              </span>
+            </HtmxElement>
+            <div class="pl-4 text-xs" />
+          </div>
         ))}
       </>,
     )
