@@ -3,6 +3,7 @@ import { worksHonoApp } from '@petittech/works'
 import { tableHonoApp } from '@petittech/works/src/tableRows/route'
 import { HtmxElement } from '@quantic/htmx'
 import { Hono } from 'hono'
+import { html } from 'hono/html'
 import { Contact } from './Contact'
 import { Profile, profileData } from './Profile'
 

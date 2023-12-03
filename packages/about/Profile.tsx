@@ -1,47 +1,285 @@
-const renderProfileData = (data, isNested = false) => {
+const renderProfileData = (data, nestingLevel = 0) => {
+  const paddingClass = `pl-${nestingLevel * 2}`
+
   return Object.entries(data).map(([key, value]) => {
-    // 値がオブジェクト（または配列）かどうかチェック
-    if (typeof value === 'object' && !Array.isArray(value)) {
+    // 値がオブジェクトまたは配列の場合、再帰的に処理
+    if (typeof value === 'object' && value !== null) {
       return (
-        <div key={key} class={isNested ? 'nested' : ''}>
-          <h3 class="text-base mt-8">{key}</h3>
-          {renderProfileData(value, true)} {/* 再帰呼び出し */}
+        <div key={key} class={`box-shadow ${paddingClass} pt-4 ${nestingLevel > 0 ? 'mt-2' : ''}`}>
+          <h3 class="text-xs">{key}</h3>
+          {renderProfileData(value, nestingLevel + 1)}
         </div>
       )
     }
-    // タプル形式の値を表示
-    return <p key={key} class="text-xs m-1">{`${value[0]}: ${value[1]}`}</p>
-    // return (
-    //   <tr>
-    //     <td>{`${value[0]}`}</td>
-    //     <td>{`${value[1]}`}</td>
-    //   </tr>
-    // );
+
+    // 配列の値を扱う場合、配列の各要素をリストとして表示
+    if (Array.isArray(value)) {
+      return (
+        <div key={key} class={`${paddingClass} text-xs`}>
+          <h4>{key}</h4>
+          <ul>
+            {value.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+
+    // 通常のキーと値のペアを表示
+    return (
+      <p key={key} class={`${paddingClass} text-xs`}>
+        {`${key}: ${value}`}
+      </p>
+    )
   })
 }
 
 const Profile = ({ profileData }) => {
-  return (
-    <div>
-      {/* <table>
-        <thead>
-          <th class="mr-4"></th>
-          <th></th>
-        </thead>
-        <tbody>{renderProfileData(profileData)}</tbody>
-      </table> */}
-      {renderProfileData(profileData)}
-    </div>
-  )
-}
-
-const Left = (props) => {
-  return <div class="mx-auto max-w-[40rem] lg:mx-0 lg:max-w-none lg:flex-none"></div>
+  return <div>{renderProfileData(profileData)}</div>
 }
 
 export { Profile }
 
-const __profileData = {
+export const __profileData = {
+  basic: {
+    name: ['氏名', '高沢 哲哉'],
+    // birthDate: ["生年月日", "1985年11月26日生（38歳）"],
+    gender: ['性別', '男性'],
+    // address: ["住所", "〒437-1304 静岡県掛川市西大渕4340-3-1-407"],
+  },
+  contact: {
+    homePhone: ['自宅電話番号', '----'],
+    mobilePhone: ['携帯電話番号', '09096370620'],
+    email: ['メールアドレス', '1.is.universe@gmail.com'],
+  },
+  education: ['学歴', '新潟大学 経済 2009年3月 大学卒業'],
+  employmentStatus: ['就業状況', '株式会社QUEN 経営'],
+  experience: {
+    architecture: ['建築設備設計_プラント設計_施工管理', '6年'],
+    softwareDevelopment: ['パッケージソフト開発_PM_PL', '3年'],
+    webDevelopment: ['オープン_Web系_PM_PL', '3年（現職）'],
+  },
+  industryExperience: {
+    construction: ['建設系', '建設・プラント・不動産・ゼネコン・サブコン・建設会社'],
+    finance: ['金融系', '金融・その他金融'],
+    // consulting: ["コンサルティング・専門事務所・監査法人・税理士法人・リサーチ", "経営・戦略コンサルティング（現職）"]
+  },
+  languageQualifications: {
+    english: ['英語', 'TOEIC 650点 / TOEFL ---- 旅行中に必要な会話ができる'],
+    otherLanguages: ['英語以外', '----'],
+    qualifications: ['保有資格', '----'],
+  },
+  employmentHistory: {
+    1: {
+      startDate: ['開始期間', '2023-01'],
+      endDate: ['終了期間', '現在'],
+      companyName: ['会社名', '株式会社WildIdea'],
+      employeeCount: ['従業員数', '50名'],
+      employmentType: ['雇用形態', '正社員'],
+      salary: ['年収', '600万円'],
+      jobDescription: [
+        '職務内容',
+        'PG/SEとして現場勤務。AI進化に伴う製造サイドの模索を行っている。',
+      ],
+    },
+    2: {
+      startDate: ['開始期間', '2019-06'],
+      endDate: ['終了期間', '現在'],
+      companyName: ['会社名', '株式会社QUEN'],
+      employeeCount: ['従業員数', '1名'],
+      employmentType: ['雇用形態', 'その他'],
+      salary: ['年収', '300万円'],
+      jobDescription: ['職務内容', '不動産賃貸の流動性を高めるSaaSの計画。現在は休止状態。'],
+    },
+    3: {
+      startDate: ['開始期間', '2015-02'],
+      endDate: ['終了期間', '現在'],
+      personalName: ['個人名', '高沢哲哉'],
+      employeeCount: ['従業員数', '1名'],
+      employmentType: ['雇用形態', 'その他'],
+      salary: ['年収', '300万円'],
+      jobDescription: [
+        '職務内容',
+        'Webアプリプロトタイプの開発、地図ベース・AIベースの企画を模索。',
+      ],
+    },
+    4: {
+      startDate: ['開始期間', '2020-06'],
+      endDate: ['終了期間', '2021-03'],
+      companyName: ['会社名', '合同会社SoLeaR'],
+      employeeCount: ['従業員数', '3名'],
+      employmentType: ['雇用形態', 'その他'],
+      salary: ['年収', '700万円'],
+      jobDescription: [
+        '職務内容',
+        '共同創業者としてパッケージ製品の提供。短期間での成功と代表辞職。',
+      ],
+    },
+    5: {
+      startDate: ['開始期間', '2012-08'],
+      endDate: ['終了期間', '2015-02'],
+      companyName: ['会社名', '株式会社NIPPO'],
+      employeeCount: ['従業員数', '20名'],
+      employmentType: ['雇用形態', '正社員'],
+      salary: ['年収', '500万円'],
+      jobDescription: [
+        '職務内容',
+        '舗装工事の現場責任者。営業所長の下で多数のプロジェクトを経験。',
+      ],
+    },
+    6: {
+      startDate: ['開始期間', '2009-08'],
+      endDate: ['終了期間', '2012-08'],
+      companyName: ['会社名', '新交ロード株式会社'],
+      employeeCount: ['従業員数', '50名'],
+      employmentType: ['雇用形態', '正社員'],
+      salary: ['年収', '350万円'],
+      jobDescription: [
+        '職務内容',
+        '区画線工事の施工責任者、営業管理者。営業所長のオファーを経験。',
+      ],
+    },
+  },
+  // 新たに追加するデータ
+  desiredConditions: {
+    jobHuntingMotivation: ['転職意欲', '積極的に転職活動している'],
+    desiredSalary: ['希望年収', '700万円'],
+    companyType: ['会社のタイプ', 'こだわらない'],
+    desiredLocation: ['希望勤務地', 'リモート'],
+    desiredJobType: [
+      [
+        '希望職種',
+        [
+          'オープン・Web系（SE）',
+          'オープン・Web系（アプリ開発）',
+          'オープン・Web系（PG）',
+          'データベース設計・構築（オープン・Web系）',
+          'ネットワーク設計・構築',
+        ],
+      ],
+    ],
+    desiredIndustry: ['希望業種', 'こだわらない'],
+  },
+  preferredCompanyEnvironment: {
+    calmVsEnergetic: ['1 落ち着いた雰囲気の職場 vs 明るく元気な雰囲気の職場 5', 3],
+    stableVsMeritBased: ['1 安定的な給与 vs 実力に応じた給与 5', 1],
+    resultVsProcess: ['1 結果重視の評価 vs プロセス重視の評価 5', 5],
+    largeVsSmall: ['1 大規模な会社 vs 中・小規模な会社 5', 1],
+    challengingVsConservative: ['1 チャレンジングな経営方針 vs 堅実な経営方針 5', 3],
+  },
+  characterAndThinking: {
+    speedyVsPersistent: ['1 スピーディ、てきぱき vs 根気よく、粘り強く 5', 5],
+    passionateVsCalm: ['1 情熱的 vs 冷静沈着 5', 5],
+    idealisticVsRealistic: ['1 理想主義 vs 現実主義 5', 3],
+    quietVsLively: ['1 穏やか、物静か vs 快活、にぎやか 5', 1],
+  },
+  skillAndExperienceRegistration: {
+    ITRelated: {
+      jobExperience: ['経験業務', 'プログラミング(個人開発のための独学の範囲内)'],
+      developmentEnvironment: [
+        '開発環境',
+        [
+          'Python(3年以上)',
+          'Java(独学)',
+          'Django(独学)',
+          'CentOS(独学)',
+          'Raspbian(独学)',
+          'JavaScript(1年以上)',
+          'TypeScript(1年以上)',
+          'AWS(独学)',
+          'Debian(1年以上3年未満)',
+          'Rust(1年以上3年未満)',
+          'Heroku(1年以上3年未満)',
+          'Ubuntu(1年以上3年未満)',
+          'Windows OS(3年以上)',
+        ],
+      ],
+    },
+    MaterialChemicalMedicalArchitectureOtherTechnical: {
+      jobExperience: [
+        '経験業務',
+        [
+          '積算(官公庁工事の積算、入札)',
+          '土木設計(官公庁からの設計依頼と提案)',
+          '施工管理・設備工事(施工管理、２級土木)',
+        ],
+      ],
+    },
+    SalesRelated: {
+      jobExperience: [
+        '経験業務',
+        [
+          '営業マネジャー、営業管理(パートナー組織に対し営業管理)',
+          '海外営業(会社代表時および個人事業主時に海外へ営業)',
+          'ルートセールス(会社員時代に法人営業とルート営業)',
+          '営業（法人向け）(会社代表時に自社製品営業)',
+          '技術営業、システム営業(会社代表時に自社製品開発)',
+        ],
+      ],
+      experienceField: [
+        '経験業務',
+        [
+          '人材サービス(有料紹介業の代理店として)',
+          '住宅・不動産・建築・土木(土木工事請負)',
+          'ソフトウェア、システム開発関連(会社代表時に自社製品営業)',
+          '金融・保険・証券(会社代表時に金融・証券関係の自社商品)',
+        ],
+      ],
+    },
+    PlanningOfficeRelated: {
+      jobExperience: [
+        '経験業務',
+        [
+          '人材教育・研修',
+          '労務管理(会社経営の一環)',
+          '管理会計(会計士試験)',
+          '法務関連(会社経営の一環)',
+          '経営分析(会社経営の一環)',
+          '決算関連(会社経営の一環)',
+          '新製品・サービス企画(自社製品および個人事業の方向性調査)',
+          '中長期経営計画立案(会社経営の一環)',
+          '販促企画(自社製品および個人事業の広告予算調査)',
+          '人員計画・人事制度立案(会社経営の一環)',
+          '資金計画・運用(会社経営の一環)',
+          '経営方針・目標立案(会社経営の一環)',
+          '人事管理(会社経営の一環、パートナー管理)',
+          '原価企画関連(会社経営の一環)',
+          '販売計画(自社製品および個人事業の規模調査)',
+          'その他関連実務(会社経営の一環)',
+          '国外調達関連(主にソフトウェアの海外調達)',
+          '宣伝計画・予算管理(自社製品および個人事業の広告予算調査)',
+          '採用実務(会社経営の一環)',
+          '入出金関連(会社経営の一環)',
+          '調査・分析(自社製品および個人事業の方向性調査)',
+          '年次経営計画立案(会社経営の一環)',
+          '証券取引関連(会社経営の一環)',
+          '販売チャネル構築・管理(自社製品および個人事業の販路調査)',
+          '総務関連業務(会社経営の一環)',
+          '税務対応(会計士試験)',
+          '一般事務・営業事務業務(会社経営の一環)',
+        ],
+      ],
+    },
+    FinancialRelated: {
+      jobExperience: [
+        '経験業務',
+        [
+          '株式(公開データクレンジングとパッケージング)',
+          'リサーチ業務(公開データクレンジングとパッケージング)',
+          '商品取引(公開データクレンジングとパッケージング)',
+          '為替(公開データクレンジングとパッケージング)',
+          '事務・管理・調査業務(公開データクレンジングとパッケージング)',
+          'サービス企画開発(公開データクレンジングとパッケージング)',
+          'クオンツ運用業務(公開データクレンジングとパッケージング)',
+        ],
+      ],
+    },
+    AdditionalSkillInfo: ['その他スキルに関する補足など', '特になし'],
+  },
+}
+
+export const profileData = {
   氏名: '高沢 哲哉',
   生年月日: '1985年11月26日生（38歳）',
   性別: '男性',
@@ -71,13 +309,13 @@ const __profileData = {
   },
   職務経歴概略: [
     {
-      開始期間: '2023-01',
+      開始期間: '2015-02',
       終了期間: '現在',
-      会社名: '株式会社WildIdea',
-      従業員数: '50名',
-      雇用形態: '契約社員',
-      年収: '600万円',
-      職務内容: 'PG/SEとして現場勤務。AI進化に伴う製造サイドの模索を行っている。',
+      個人名: '高沢哲哉',
+      従業員数: '1名',
+      雇用形態: 'その他',
+      年収: '300万円',
+      職務内容: 'Webエンジニア。地図ベース・AIベースのアプリ企画を模索。',
     },
     {
       開始期間: '2019-06',
@@ -89,13 +327,13 @@ const __profileData = {
       職務内容: '不動産賃貸の流動性を高めるSaaSの計画。現在は休止状態。',
     },
     {
-      開始期間: '2015-02',
-      終了期間: '現在',
-      個人名: '高沢哲哉',
-      従業員数: '1名',
-      雇用形態: 'その他',
-      年収: '300万円',
-      職務内容: 'Webサイトの製作、金融データ提供プログラムの開発。PaaS開発を目指している。',
+      開始期間: '2023-01',
+      終了期間: '2023-07',
+      会社名: '株式会社WildIdea',
+      従業員数: '50名',
+      雇用形態: '契約社員',
+      年収: '600万円',
+      職務内容: 'PG/SEとして現場勤務。',
     },
     {
       開始期間: '2020-06',
@@ -127,7 +365,7 @@ const __profileData = {
   ],
   希望条件: {
     転職意欲: '積極的に転職活動している',
-    希望年収: '800万円',
+    希望年収: '700万円',
     会社のタイプ: 'こだわらない',
     希望勤務地: 'こだわらない',
     希望職種: [
@@ -164,17 +402,21 @@ const __profileData = {
     ITエンジニア関連職種: {
       経験業務: 'プログラミング(個人開発のための独学の範囲内)',
       開発環境: [
-        'Python(独学)',
+        'Python(3年未満)',
+        'JavaScript(3年未満)',
+        'Typescript(3年未満)',
         'Java(独学)',
-        'Django(独学)',
+        'Rust(1年以上3年未満)',
+        'SQL(1年以上3年未満)',
+        'AWS(1年以上3年未満)',
+        'GCP(1年以上3年未満)',
+        'Azure(1年以上3年未満)',
+        'CloudFlare(1年以上3年未満)',
+        'Heroku(1年以上3年未満)',
+        'Debian(3年以上)',
+        'Ubuntu(3年以上)',
         'CentOS(独学)',
         'Raspbian(独学)',
-        'JavaScript(独学)',
-        'AWS(独学)',
-        'Debian(1年以上3年未満)',
-        'Rust(1年以上3年未満)',
-        'Heroku(1年以上3年未満)',
-        'Ubuntu(1年以上3年未満)',
         'Windows OS(3年以上)',
       ],
     },
@@ -248,245 +490,5 @@ const __profileData = {
       技術系資格全般: ['土木施工管理技士', '危険物取扱者'],
       資格全般: ['日商簿記検定(1級、2級)', '証券アナリスト', '普通自動車免許（第一種）'],
     },
-  },
-}
-
-export const profileData = {
-  basic: {
-    name: ['氏名', '高沢 哲哉'],
-    // birthDate: ["生年月日", "1985年11月26日生（38歳）"],
-    gender: ['性別', '男性'],
-    // address: ["住所", "〒437-1304 静岡県掛川市西大渕4340-3-1-407"],
-  },
-  contact: {
-    // homePhone: ["自宅電話番号", "----"],
-    // mobilePhone: ["携帯電話番号", "09096370620"],
-    // email: ["メールアドレス", "1.is.universe@gmail.com"],
-  },
-  education: ['学歴', '新潟大学 経済 2009年3月 大学卒業'],
-  employmentStatus: ['就業状況', '株式会社QUEN 経営'],
-  experience: {
-    architecture: ['建築設備設計_プラント設計_施工管理', '6年'],
-    softwareDevelopment: ['パッケージソフト開発_PM_PL', '3年'],
-    webDevelopment: ['オープン_Web系_PM_PL', '3年（現職）'],
-  },
-  industryExperience: {
-    construction: ['建設系', '建設・プラント・不動産・ゼネコン・サブコン・建設会社'],
-    finance: ['金融系', '金融・その他金融'],
-    // consulting: ["コンサルティング・専門事務所・監査法人・税理士法人・リサーチ", "経営・戦略コンサルティング（現職）"]
-  },
-  languageQualifications: {
-    english: ['英語', 'TOEIC 650点 / TOEFL ---- 旅行中に必要な会話ができる'],
-    otherLanguages: ['英語以外', '----'],
-    qualifications: ['保有資格', '----'],
-  },
-  employmentHistory: {
-    1: {
-      startDate: ['開始期間', '2023-01'],
-      endDate: ['終了期間', '現在'],
-      companyName: ['会社名', '株式会社WildIdea'],
-      employeeCount: ['従業員数', '50名'],
-      employmentType: ['雇用形態', '契約社員'],
-      salary: ['年収', '600万円'],
-      jobDescription: [
-        '職務内容',
-        'PG/SEとして現場勤務。AI進化に伴う製造サイドの模索を行っている。',
-      ],
-    },
-    2: {
-      startDate: ['開始期間', '2019-06'],
-      endDate: ['終了期間', '現在'],
-      companyName: ['会社名', '株式会社QUEN'],
-      employeeCount: ['従業員数', '1名'],
-      employmentType: ['雇用形態', 'その他'],
-      salary: ['年収', '300万円'],
-      jobDescription: ['職務内容', '不動産賃貸の流動性を高めるSaaSの計画。現在は休止状態。'],
-    },
-    3: {
-      startDate: ['開始期間', '2015-02'],
-      endDate: ['終了期間', '現在'],
-      personalName: ['個人名', '高沢哲哉'],
-      employeeCount: ['従業員数', '1名'],
-      employmentType: ['雇用形態', 'その他'],
-      salary: ['年収', '300万円'],
-      jobDescription: [
-        '職務内容',
-        'Webサイトの製作、金融データ提供プログラムの開発。PaaS開発を目指している。',
-      ],
-    },
-    4: {
-      startDate: ['開始期間', '2020-06'],
-      endDate: ['終了期間', '2021-03'],
-      companyName: ['会社名', '合同会社SoLeaR'],
-      employeeCount: ['従業員数', '3名'],
-      employmentType: ['雇用形態', 'その他'],
-      salary: ['年収', '700万円'],
-      jobDescription: [
-        '職務内容',
-        '共同創業者としてパッケージ製品の提供。短期間での成功と代表辞職。',
-      ],
-    },
-    5: {
-      startDate: ['開始期間', '2012-08'],
-      endDate: ['終了期間', '2015-02'],
-      companyName: ['会社名', '株式会社NIPPO'],
-      employeeCount: ['従業員数', '20名'],
-      employmentType: ['雇用形態', '正社員'],
-      salary: ['年収', '500万円'],
-      jobDescription: [
-        '職務内容',
-        '舗装工事の現場責任者。営業所長の下で多数のプロジェクトを経験。',
-      ],
-    },
-    6: {
-      startDate: ['開始期間', '2009-08'],
-      endDate: ['終了期間', '2012-08'],
-      companyName: ['会社名', '新交ロード株式会社'],
-      employeeCount: ['従業員数', '50名'],
-      employmentType: ['雇用形態', '正社員'],
-      salary: ['年収', '350万円'],
-      jobDescription: [
-        '職務内容',
-        '区画線工事の施工責任者、営業管理者。営業所長のオファーを経験。',
-      ],
-    },
-  },
-  // 新たに追加するデータ
-  desiredConditions: {
-    jobHuntingMotivation: ['転職意欲', '積極的に転職活動している'],
-    desiredSalary: ['希望年収', '800万円'],
-    companyType: ['会社のタイプ', 'こだわらない'],
-    desiredLocation: ['希望勤務地', 'こだわらない'],
-    desiredJobType: [
-      [
-        '希望職種',
-        [
-          'オープン・Web系（SE）',
-          'オープン・Web系（アプリ開発）',
-          'オープン・Web系（PG）',
-          'データベース設計・構築（オープン・Web系）',
-          'ネットワーク設計・構築',
-        ],
-      ],
-    ],
-    desiredIndustry: ['希望業種', 'こだわらない'],
-  },
-  preferredCompanyEnvironment: {
-    calmVsEnergetic: ['落ち着いた雰囲気の職場 vs 明るく元気な雰囲気の職場', 3],
-    stableVsMeritBased: ['安定的な給与 vs 実力に応じた給与', 1],
-    resultVsProcess: ['結果重視の評価 vs プロセス重視の評価', 5],
-    largeVsSmall: ['大規模な会社 vs 中・小規模な会社', 1],
-    challengingVsConservative: ['チャレンジングな経営方針 vs 堅実な経営方針', 3],
-  },
-  characterAndThinking: {
-    speedyVsPersistent: ['スピーディ、てきぱき vs 根気よく、粘り強く', 5],
-    passionateVsCalm: ['情熱的 vs 冷静沈着', 5],
-    idealisticVsRealistic: ['理想主義 vs 現実主義', 3],
-    quietVsLively: ['穏やか、物静か vs 快活、にぎやか', 1],
-  },
-  skillAndExperienceRegistration: {
-    ITRelated: {
-      jobExperience: ['経験業務', 'プログラミング(個人開発のための独学の範囲内)'],
-      developmentEnvironment: [
-        '開発環境',
-        [
-          'Python(独学)',
-          'Java(独学)',
-          'Django(独学)',
-          'CentOS(独学)',
-          'Raspbian(独学)',
-          'JavaScript(独学)',
-          'AWS(独学)',
-          'Debian(1年以上3年未満)',
-          'Rust(1年以上3年未満)',
-          'Heroku(1年以上3年未満)',
-          'Ubuntu(1年以上3年未満)',
-          'Windows OS(3年以上)',
-        ],
-      ],
-    },
-    MaterialChemicalMedicalArchitectureOtherTechnical: {
-      jobExperience: [
-        '経験業務',
-        [
-          '積算(官公庁工事の積算、入札)',
-          '土木設計(官公庁からの設計依頼と提案)',
-          '施工管理・設備工事(施工管理、２級土木)',
-        ],
-      ],
-    },
-    SalesRelated: {
-      jobExperience: [
-        '経験業務',
-        [
-          '営業マネジャー、営業管理(パートナー組織に対し営業管理)',
-          '海外営業(会社代表時および個人事業主時に海外へ営業)',
-          'ルートセールス(会社員時代に法人営業とルート営業)',
-          '営業（法人向け）(会社代表時に自社製品営業)',
-          '技術営業、システム営業(会社代表時に自社製品開発)',
-        ],
-      ],
-      experienceField: [
-        '経験分野',
-        [
-          '人材サービス(有料紹介業の代理店として)',
-          '住宅・不動産・建築・土木(土木工事請負)',
-          'ソフトウェア、システム開発関連(会社代表時に自社製品営業)',
-          '金融・保険・証券(会社代表時に金融・証券関係の自社商品)',
-        ],
-      ],
-    },
-    PlanningOfficeRelated: {
-      jobExperience: [
-        '経験業務',
-        [
-          '人材教育・研修',
-          '労務管理(会社経営の一環)',
-          '管理会計(会計士試験)',
-          '法務関連(会社経営の一環)',
-          '経営分析(会社経営の一環)',
-          '決算関連(会社経営の一環)',
-          '新製品・サービス企画(自社製品および個人事業の方向性調査)',
-          '中長期経営計画立案(会社経営の一環)',
-          '販促企画(自社製品および個人事業の広告予算調査)',
-          '人員計画・人事制度立案(会社経営の一環)',
-          '資金計画・運用(会社経営の一環)',
-          '経営方針・目標立案(会社経営の一環)',
-          '人事管理(会社経営の一環、パートナー管理)',
-          '原価企画関連(会社経営の一環)',
-          '販売計画(自社製品および個人事業の規模調査)',
-          'その他関連実務(会社経営の一環)',
-          '国外調達関連(主にソフトウェアの海外調達)',
-          '宣伝計画・予算管理(自社製品および個人事業の広告予算調査)',
-          '採用実務(会社経営の一環)',
-          '入出金関連(会社経営の一環)',
-          '調査・分析(自社製品および個人事業の方向性調査)',
-          '年次経営計画立案(会社経営の一環)',
-          '証券取引関連(会社経営の一環)',
-          '販売チャネル構築・管理(自社製品および個人事業の販路調査)',
-          '総務関連業務(会社経営の一環)',
-          '税務対応(会計士試験)',
-          '一般事務・営業事務業務(会社経営の一環)',
-        ],
-      ],
-    },
-    FinancialRelated: {
-      jobExperience: [
-        '経験業務',
-        [
-          '株式(公開データクレンジングとパッケージング)',
-          'リサーチ業務(公開データクレンジングとパッケージング)',
-          '商品取引(公開データクレンジングとパッケージング)',
-          '為替(公開データクレンジングとパッケージング)',
-          '事務・管理・調査業務(公開データクレンジングとパッケージング)',
-          'サービス企画開発(公開データクレンジングとパッケージング)',
-          'クオンツ運用業務(公開データクレンジングとパッケージング)',
-        ],
-      ],
-    },
-    AdditionalSkillInfo: [
-      'その他スキルに関する補足事項',
-      '※別途経歴書では、パッケージ製品等の提供と記させていただいておりますが、既存の製品の組み合わせとGUI作業、および簡易なDocker操作の面が大きく、企画・要件定義・開発・保守などの事業実績は小さく見積もってください。',
-    ],
   },
 }
