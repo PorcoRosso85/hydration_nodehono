@@ -45,7 +45,7 @@ app
               method="get"
               url={url[0]}
               target="next div"
-              pushUrlHistory="true"
+              // pushUrlHistory="true"
               class='"overflow-hidden md:max-w-2xs my-5 transform translate-y-1 hover:translate-y-0 duration-500 ease-in-out"'
             >
               <span>

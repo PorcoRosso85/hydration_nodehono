@@ -28,6 +28,7 @@ const endpoints = {
   dropdown: '/dropdown',
   map: '/map',
   imagecanvas: '/imagecanvas',
+  htmx: '/htmx',
 }
 
 app

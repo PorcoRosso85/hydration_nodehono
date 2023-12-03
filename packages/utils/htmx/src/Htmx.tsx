@@ -20,6 +20,7 @@ type HtmxProps = {
   on?: string
   pushUrlHistory?: 'true' | 'false'
   confirm?: string
+  id?: string
   class?: string
   children?: any
 }
@@ -46,6 +47,7 @@ export const HtmxElement = (props: HtmxProps) => {
         'hx-push-url': props.pushUrlHistory.toString(),
       })}
       {...(props.class && { class: props.class })}
+      {...(props.id && { id: props.id })}
     >
       {children}
     </Element>
