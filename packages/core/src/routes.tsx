@@ -3,6 +3,8 @@ import { html } from 'hono/html'
 import type { FC } from 'hono/jsx'
 
 import { aboutHonoApp } from '@petittech/about'
+import { modalHonoApp } from '@petittech/works/src/modal/route'
+import { toastHonoApp } from '@petittech/works/src/toast/route'
 import { HtmxElement } from '@quantic/htmx'
 import { Meta } from './components/Meta'
 
@@ -33,24 +35,30 @@ app
   // })
 
   .get(endpoints.root, async (c) => {
-    const urls = [aboutHonoApp.endpoint]
+    const urls = [[aboutHonoApp.endpoint, '著者について']]
     return await c.html(
       <>
         <Meta>
           {urls.map((url, index) => (
-            <div class="flex flex-col bg-white rounded shadow-lg p-12 mt-12">
-              <HtmxElement
-                elt="button"
-                method="get"
-                url={url}
-                trigger="load, click" // クリックして再読み込みしたいときに
-                target={`#target_${index}`}
-                // pushUrlHistory="true"
-              >
-                {url}
-              </HtmxElement>
-              <div id={`target_${index}`} />
-            </div>
+            <>
+              <div class="box-shadow pt-8">
+                <HtmxElement
+                  elt="button"
+                  method="get"
+                  url={url[0]}
+                  trigger="load, click" // クリックして再読み込みしたいときに
+                  target="next div"
+                  // pushUrlHistory="true"
+                >
+                  <span>{`${url[0]}: ${url[1]}`}</span>
+                </HtmxElement>
+                <br />
+                <span class="text-xs pl-1">
+                  ※ 以下サーバーにレンダリングリクエストするボタンです
+                </span>
+                <div class="pl-4 text-sm" />
+              </div>
+            </>
           ))}
         </Meta>
       </>,

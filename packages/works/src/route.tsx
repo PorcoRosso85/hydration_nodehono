@@ -1,8 +1,6 @@
+import { HtmxElement } from '@quantic/htmx'
 import { Hono } from 'hono'
-import { Works } from './Works'
-
-import { works } from './Works'
-import { DashboardApp } from './dashboard/App'
+import { ImageInCanvas, ScriptImageInCanvas } from './canvas'
 import { Chat } from './dashboard/Chat'
 import { DashBoard } from './dashboard/DashBoard'
 import { Login } from './dashboard/Login'
@@ -10,13 +8,13 @@ import { NavAndIcon } from './dashboard/NavAndIcon'
 import { Payment } from './dashboard/Payment'
 import { Price } from './dashboard/Price'
 import { ProductsGrid } from './dashboard/ProductsGrid'
-import { Table } from './dashboard/Table'
-
-import { HtmxElement } from '@quantic/htmx'
+import { Dropdown } from './dropdown'
+import { Maplibre } from './map'
+import { Toast } from './toast'
 
 const app = new Hono()
 
-const endpoint = '/works'
+const endpoint = '/about/works'
 
 const endpoints = {
   root: '/',
@@ -27,7 +25,10 @@ const endpoints = {
   price: '/price',
   payment: '/payment',
   chat: '/chat',
-  table: '/table',
+  dropdown: '/dropdown',
+  map: '/map',
+  imagecanvas: '/imagecanvas',
+  htmx: '/htmx',
 }
 
 app
@@ -38,7 +39,7 @@ app
           <HtmxElement
             elt="button"
             method="get"
-            url={`/about${endpoint}${value}`}
+            url={`${endpoint}${value}`}
             class="bg-blue-300 text-white py-1 px-2 rounded hover:bg-blue-500 m-2"
             target="#target"
           >
@@ -85,9 +86,28 @@ app
   .get('/chat', (c) => {
     return c.html(<Chat />)
   })
-
-  .get('/table', (c) => {
-    return c.html(<Table />)
+  .get(endpoints.dropdown, (c) => {
+    return c.html(<Dropdown />)
+  })
+  .get(endpoints.map, (c) => {
+    return c.html(<Maplibre />)
+  })
+  .get(endpoints.imagecanvas, (c) => {
+    return c.html(
+      <>
+        hi
+        <ScriptImageInCanvas />
+        <HtmxElement elt="div" method="get" url={`${endpoint}${endpoints.imagecanvas}/component`} />
+      </>,
+    )
+  })
+  .get(`${endpoints.imagecanvas}/component`, (c) => {
+    return c.html(
+      <>
+        hi
+        <ImageInCanvas />
+      </>,
+    )
   })
 
 export const worksHonoApp = {

@@ -140,10 +140,8 @@ export const Header = () => {
     <>
       <style>{style}</style>
       <header class="header">
-        <HtmxElement elt="a" method="get" url="/" target="body">
-          <p hx-push-url="true" class="text-3xl">
-            Tetsuya Takasawa
-          </p>
+        <HtmxElement elt="a" method="get" url="/" target="body" pushUrlHistory="true">
+          <p class="text-3xl">Tetsuya Takasawa</p>
         </HtmxElement>
         {/* <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn">
