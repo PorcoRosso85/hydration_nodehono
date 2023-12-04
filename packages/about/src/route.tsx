@@ -3,6 +3,7 @@ import { worksHonoApp } from '@petittech/works'
 import { tableHonoApp } from '@petittech/works/src/tableRows/route'
 import { HtmxElement } from '@quantic/htmx'
 import { Hono } from 'hono'
+import { basicAuth } from 'hono/basic-auth'
 import { html } from 'hono/html'
 import { Contact } from './Contact'
 import { Profile, profileData } from './Profile'
@@ -13,14 +14,25 @@ const endpoint = '/about'
 
 const endpoints = {
   root: '/',
-  profile: '/profile',
   contact: '/contact',
+  auth: {
+    root: '/auth',
+    profile: '/auth/profile',
+  },
 }
 
 app
+  .use(
+    `${endpoints.auth.root}/*`,
+    basicAuth({
+      username: 'por',
+      password: 'ros',
+    }),
+  )
+
   .get(endpoints.root, async (c) => {
     const urls = [
-      [`${endpoint}${endpoints.profile}`, '経歴'],
+      [`${endpoint}${endpoints.auth.profile}`, '経歴'],
       [worksHonoApp.endpoint, '制作サンプル'],
       [`${endpoint}${endpoints.contact}`, '連絡フォーム'],
       [`${endpoint}${articlesHonoApp.endpoint}`, '記事サンプル'],
@@ -59,7 +71,7 @@ app
     )
   })
 
-  .get(endpoints.profile, (c) => {
+  .get(endpoints.auth.profile, (c) => {
     return c.html(
       <>
         <Profile profileData={profileData} />
